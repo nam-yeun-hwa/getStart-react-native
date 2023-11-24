@@ -6,11 +6,16 @@
  */
 
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Text } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+} from "react-native";
 import Header from "./src/components/layout/Header";
 import WeeklySchedule from "./src/components/weeklySchedule/WeeklyCarousel";
 import WarningNoPost from "./src/components/warningSign/WarningNoPost";
-import AddButton from "./src/components/weeklySchedule/AddButton";
+import InputBox from "./src/components/weeklySchedule/InputBox";
 
 function App(): JSX.Element {
   const [weeklyList, setWeeklyList] = useState([
@@ -441,10 +446,15 @@ function App(): JSX.Element {
   return (
     <>
       <SafeAreaView style={styles.container}>
-        <Header />
-        <WeeklySchedule></WeeklySchedule>
-        <WarningNoPost />
-        <AddButton />
+        <KeyboardAvoidingView
+          behavior={Platform.select({ ios: "padding" })}
+          style={styles.avoid}
+        >
+          <Header />
+          <WeeklySchedule />
+          <WarningNoPost />
+          <InputBox />
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </>
   );
@@ -454,6 +464,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
+  },
+  avoid: {
+    flex: 1,
   },
 });
 

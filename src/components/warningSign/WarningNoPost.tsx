@@ -1,18 +1,15 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
 function WarningNoPost(): JSX.Element {
-  console.log("dssfdsfjj");
+  const screenWidth = Dimensions.get("window").width;
+
   return (
     <View style={styles.container}>
       <Image
         source={require("../../assets/images/img_no_post.png")}
-        style={styles.image}
+        style={{ width: screenWidth / 1.4, height: screenWidth / 1.1 }}
         resizeMode={"contain"}
       />
-      <Text style={styles.emphasisText}>No checklists</Text>
-      <Text style={styles.smallText}>
-        Add checklists that should be checked weekly.
-      </Text>
     </View>
   );
 }
@@ -22,8 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 30,
-    // backgroundColor:'red'
   },
   image: {
     width: 190,
