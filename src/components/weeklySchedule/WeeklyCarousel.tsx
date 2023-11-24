@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { Dimensions } from "react-native";
 import WeeklyItem from "./WeeklyItem";
