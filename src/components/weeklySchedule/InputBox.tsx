@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TextInput,
   Touchable,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
@@ -53,14 +54,17 @@ function InputBox(): JSX.Element {
       {activeInputStyle &&
         Platform.select({
           ios: (
-            <TouchableWithoutFeedback onPress={onPressShowInputText}>
+            <TouchableOpacity
+              onPress={onPressShowInputText}
+              activeOpacity={0.5}
+            >
               <View style={styles.showBtn}>
                 <Image
                   source={require("../../assets/icon/ico_add_weekly_item.png")}
                   resizeMode="contain"
                 ></Image>
               </View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
           ),
         })}
     </View>
