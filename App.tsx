@@ -18,6 +18,7 @@ import WarningNoPost from "./src/components/warningSign/WarningNoPost";
 import InputBox from "./src/components/weeklySchedule/InputBox";
 import List from "./src/components/weeklySchedule/List";
 import UserWeekSchedule from "./src/components/weeklySchedule/UserWeekSchedule";
+import Dim from "./src/components/weeklySchedule/Dim";
 
 function App(): JSX.Element {
   const [weeklyList, setWeeklyList] = useState([

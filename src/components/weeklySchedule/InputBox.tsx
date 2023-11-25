@@ -4,12 +4,15 @@ import {
   Image,
   Keyboard,
   Platform,
+  StatusBar,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+
+import DimBehindKeyboardExample from "./Dim";
 
 function InputBox(): JSX.Element {
   const TextInputRef = useRef<TextInput | null>(null);
@@ -25,28 +28,31 @@ function InputBox(): JSX.Element {
     setActiveInput(false);
   };
   return (
-    <View style={styles.container}>
-      <View
-        style={[styles.inputContainer, { opacity: activeInputStyle ? 0 : 1 }]}
-      >
-        <TextInput
-          placeholder="Add a checklist..."
-          style={styles.input}
-          ref={TextInputRef}
-        ></TextInput>
-        <View style={styles.addContainer}>
-          {Platform.select({
-            ios: (
-              <TouchableWithoutFeedback onPress={onPressAddItem}>
-                <View style={styles.addButton}>
-                  <Image
-                    source={require("../../assets/icon/ico_arrow_up.png")}
-                    style={styles.arrow}
-                  ></Image>
-                </View>
-              </TouchableWithoutFeedback>
-            ),
-          })}
+    <>
+      <DimBehindKeyboardExample active={!activeInputStyle} />
+      <View style={styles.container}>
+        <View
+          style={[styles.inputContainer, { opacity: activeInputStyle ? 0 : 1 }]}
+        >
+          <TextInput
+            placeholder="Add a checklist..."
+            style={styles.input}
+            ref={TextInputRef}
+          ></TextInput>
+          <View style={styles.addContainer}>
+            {Platform.select({
+              ios: (
+                <TouchableWithoutFeedback onPress={onPressAddItem}>
+                  <View style={styles.addButton}>
+                    <Image
+                      source={require("../../assets/icon/ico_arrow_up.png")}
+                      style={styles.arrow}
+                    ></Image>
+                  </View>
+                </TouchableWithoutFeedback>
+              ),
+            })}
+          </View>
         </View>
       </View>
 
@@ -66,7 +72,7 @@ function InputBox(): JSX.Element {
             </TouchableOpacity>
           ),
         })}
-    </View>
+    </>
   );
 }
 
@@ -76,6 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: "row",
+    backgroundColor: "white",
   },
   showBtn: {
     height: 52,
