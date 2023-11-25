@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { Dimensions } from "react-native";
 import WeeklyCarouselItem from "./WeeklyCarouselItem";
@@ -40,7 +40,7 @@ function WeeklyCarousel(): JSX.Element {
   };
 
   return (
-    <View>
+    <View style={styles.contianer}>
       <Carousel
         data={data}
         renderItem={(item) => renderItem(item)}
@@ -56,5 +56,11 @@ function WeeklyCarousel(): JSX.Element {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  contianer: {
+    paddingBottom: 16,
+  },
+});
 
 export default WeeklyCarousel;
