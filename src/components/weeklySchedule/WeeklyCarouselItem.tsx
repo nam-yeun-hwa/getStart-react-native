@@ -1,12 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from "react-native";
 
 interface IWeeklyItem {
   step: string;
   active: boolean;
 }
 
-function WeeklyItem(props: IWeeklyItem): JSX.Element {
-  const {step, active} = props;
+function WeeklyCarouselItem(props: IWeeklyItem): JSX.Element {
+  const { step, active } = props;
   return (
     <View style={[styles.container, active && styles.activeState]}>
       <Text style={[styles.smallText, active && styles.activeFontColor]}>
@@ -23,30 +23,27 @@ const styles = StyleSheet.create({
   container: {
     height: 70,
     borderRadius: 60,
-    backgroundColor: '#F6F5F8',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    // paddingTop: 50,
-    // paddingBottom: 5,
+    backgroundColor: "#F6F5F8",
+    justifyContent: "center",
+    alignItems: "center",
     marginLeft: 8,
     marginRight: 8,
   },
   smallText: {
     fontSize: 11.2,
-    color: '#999999',
+    color: "#999999",
   },
   emphasisText: {
     fontSize: 19,
-    color: '#999999',
-    fontWeight: '700',
+    color: "#999999",
+    fontWeight: "700",
   },
   activeState: {
-    backgroundColor: '#44CEC6',
+    backgroundColor: "#44CEC6",
   },
   activeFontColor: {
-    color: '#FFF',
+    color: "#FFF",
   },
 });
 
-export default WeeklyItem;
+export default WeeklyCarouselItem;

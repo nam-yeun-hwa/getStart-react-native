@@ -16,6 +16,7 @@ import Header from "./src/components/layout/Header";
 import WeeklySchedule from "./src/components/weeklySchedule/WeeklyCarousel";
 import WarningNoPost from "./src/components/warningSign/WarningNoPost";
 import InputBox from "./src/components/weeklySchedule/InputBox";
+import UserWeeklyList from "./src/components/weeklySchedule/UserWeeklyList";
 
 function App(): JSX.Element {
   const [weeklyList, setWeeklyList] = useState([
@@ -443,6 +444,25 @@ function App(): JSX.Element {
     },
   ]);
 
+  const [sample, setSample] = useState([
+    {
+      id: 1,
+      weekNumber: 1,
+      content:
+        "Track your ovulation cycle to an idea of when you will be ovulating.",
+    },
+    {
+      id: 2,
+      weekNumber: 1,
+      content: "Study about symptoms of ovulation",
+    },
+    {
+      id: 3,
+      weekNumber: 1,
+      content: "Take folic acid",
+    },
+  ]);
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -452,7 +472,12 @@ function App(): JSX.Element {
         >
           <Header />
           <WeeklySchedule />
-          <WarningNoPost />
+          {sample.length === 0 ? (
+            <WarningNoPost />
+          ) : (
+            <UserWeeklyList data={sample} />
+          )}
+
           <InputBox />
         </KeyboardAvoidingView>
       </SafeAreaView>

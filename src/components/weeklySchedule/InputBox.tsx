@@ -6,7 +6,6 @@ import {
   Platform,
   StyleSheet,
   TextInput,
-  Touchable,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,

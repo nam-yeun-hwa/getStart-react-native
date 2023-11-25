@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { Dimensions } from "react-native";
-import WeeklyItem from "./WeeklyItem";
+import WeeklyCarouselItem from "./WeeklyCarouselItem";
 
 function WeeklyCarousel(): JSX.Element {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -32,7 +32,7 @@ function WeeklyCarousel(): JSX.Element {
     const activeItemStyle = index === activeIndex ? true : false;
 
     console.log("render", item);
-    return <WeeklyItem step={item.step} active={activeItemStyle} />;
+    return <WeeklyCarouselItem step={item.step} active={activeItemStyle} />;
   };
 
   const handleSnapToItem = (index) => {
