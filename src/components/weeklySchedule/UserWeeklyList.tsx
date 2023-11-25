@@ -10,16 +10,21 @@ function UserWeeklyList({ data }) {
   const renderItem = ({ item }: { item: UserWeeklyData }) => (
     <View style={styles.container}>
       <View style={styles.item}>
-        <View style={styles.check}>
+        {/* <View style={styles.check}>
           <Image
             source={require("../../assets/icon/ico_check.png")}
-            style={styles.icon}
+            style={styles.iconCheck}
           />
-        </View>
+        </View> */}
         <Text style={styles.txt} numberOfLines={2} ellipsizeMode="tail">
           {item.content}
         </Text>
-        {/* <View></View> */}
+        <View style={styles.del}>
+          <Image
+            source={require("../../assets/icon/ico_minus.png")}
+            style={styles.iconMinus}
+          ></Image>
+        </View>
       </View>
     </View>
   );
@@ -48,6 +53,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
 
+  iconCheck: {
+    width: 16,
+    height: 16,
+  },
+
+  iconMinus: {
+    width: 18,
+    height: 18,
+  },
+
   check: {
     width: 24,
     height: 24,
@@ -59,9 +74,14 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 
-  icon: {
-    width: 16,
-    height: 16,
+  del: {
+    width: 28,
+    height: 28,
+    borderRadius: 50,
+    backgroundColor: "#FF5146",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 8,
   },
 
   txt: {
