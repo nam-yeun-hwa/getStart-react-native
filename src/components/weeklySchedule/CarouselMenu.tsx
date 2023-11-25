@@ -2,9 +2,9 @@ import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { Dimensions } from "react-native";
-import WeeklyCarouselItem from "./WeeklyCarouselItem";
+import CarouselItem from "./CarouselItem";
 
-function WeeklyCarousel(): JSX.Element {
+function CarouselMenu(): JSX.Element {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const width = Dimensions.get("window").width;
@@ -32,7 +32,7 @@ function WeeklyCarousel(): JSX.Element {
     const activeItemStyle = index === activeIndex ? true : false;
 
     console.log("render", item);
-    return <WeeklyCarouselItem step={item.step} active={activeItemStyle} />;
+    return <CarouselItem step={item.step} active={activeItemStyle} />;
   };
 
   const handleSnapToItem = (index) => {
@@ -60,7 +60,9 @@ function WeeklyCarousel(): JSX.Element {
 const styles = StyleSheet.create({
   contianer: {
     paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F6F5F8",
   },
 });
 
-export default WeeklyCarousel;
+export default CarouselMenu;

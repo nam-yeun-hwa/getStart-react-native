@@ -13,10 +13,11 @@ import {
   StyleSheet,
 } from "react-native";
 import Header from "./src/components/layout/Header";
-import WeeklySchedule from "./src/components/weeklySchedule/WeeklyCarousel";
+import CarouselMenu from "./src/components/weeklySchedule/CarouselMenu";
 import WarningNoPost from "./src/components/warningSign/WarningNoPost";
 import InputBox from "./src/components/weeklySchedule/InputBox";
-import UserWeeklyList from "./src/components/weeklySchedule/UserWeeklyList";
+import List from "./src/components/weeklySchedule/List";
+import UserWeekSchedule from "./src/components/weeklySchedule/UserWeekSchedule";
 
 function App(): JSX.Element {
   const [weeklyList, setWeeklyList] = useState([
@@ -471,11 +472,11 @@ function App(): JSX.Element {
           style={styles.avoid}
         >
           <Header />
-          <WeeklySchedule />
+          <CarouselMenu />
           {sample.length === 0 ? (
             <WarningNoPost />
           ) : (
-            <UserWeeklyList data={sample} />
+            <UserWeekSchedule data={sample} />
           )}
 
           <InputBox />

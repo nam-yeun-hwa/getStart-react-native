@@ -6,7 +6,11 @@ interface UserWeeklyData {
   content: string;
 }
 
-function UserWeeklyList({ data }) {
+interface PropsUserWeeklyData {
+  data: Array<UserWeeklyData>;
+}
+
+function List({ data }: PropsUserWeeklyData) {
   const renderItem = ({ item }: { item: UserWeeklyData }) => (
     <View style={styles.container}>
       <View style={styles.item}>
@@ -92,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserWeeklyList;
+export default List;

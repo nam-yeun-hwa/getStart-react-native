@@ -5,7 +5,7 @@ interface IWeeklyItem {
   active: boolean;
 }
 
-function WeeklyCarouselItem(props: IWeeklyItem): JSX.Element {
+function CarouselItem(props: IWeeklyItem): JSX.Element {
   const { step, active } = props;
   return (
     <View style={[styles.container, active && styles.activeState]}>
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WeeklyCarouselItem;
+export default CarouselItem;
