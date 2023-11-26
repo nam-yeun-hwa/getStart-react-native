@@ -256,8 +256,31 @@ function App(): JSX.Element {
 
   const [currentIndex, setCurrentIndex] = useState(1);
 
+  /**
+   * @function onSelectWeek
+   * @param select 선택된 week
+   * @deprecated 캐러셀에서 현재 선택된 index
+   */
   const onSelectWeek = (select: number) => {
     setCurrentIndex(select);
+  };
+
+  /**
+   * @function onInsert 항목추가
+   * @param text
+   * @description 현재 week list 항목 추가
+   */
+  const onInsert = (text: string) => {
+    const nextId =
+      weeklyList.length > 0 ? Math.max(...weeklyList.map((v) => v.id)) + 1 : 1;
+    const weekItem = {
+      id: nextId,
+      weekNumber: currentIndex,
+      content: text,
+      done: false,
+    };
+
+    setWeeklyList(weeklyList.concat(weekItem));
   };
 
   return (
@@ -281,7 +304,7 @@ function App(): JSX.Element {
               />
             )}
 
-            <InputBox />
+            <InputBox onInsert={onInsert} />
           </KeyboardAvoidingView>
         </SafeAreaView>
       </SafeAreaProvider>

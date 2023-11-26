@@ -46,8 +46,6 @@ function List({ data }: PropsUserWeeklyData) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: 28,
-    // backgroundColor: "red",
   },
 
   item: {

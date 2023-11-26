@@ -10,14 +10,19 @@ import {
 
 interface DimActive {
   active: boolean;
+  onToggle: () => void;
 }
 
-const DimBehindKeyboardExample = ({ active }: DimActive) => {
+const DimBehindKeyboardExample = ({ active, onToggle }: DimActive) => {
+  const onPress = () => {
+    Keyboard.dismiss();
+    onToggle();
+  };
   return (
     <>
       {active && (
         <>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.container}>
               <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}

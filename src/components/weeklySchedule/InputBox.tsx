@@ -14,22 +14,47 @@ import {
 
 import DimBehindKeyboardExample from "./Dim";
 
-function InputBox(): JSX.Element {
+interface InputBoxProps {
+  onInsert: (text: string) => void;
+}
+function InputBox({ onInsert }: InputBoxProps): JSX.Element {
   const TextInputRef = useRef<TextInput | null>(null);
   const [activeInputStyle, setActiveInput] = useState(true);
+  const [text, setText] = useState("");
 
+  /**
+   * @function onPressAddItem
+   * @description 키보드 입력 버튼 누르면 내용 리스트에 추가 되도록 구현 및 키보드 빈 스트링으로 초기화
+   */
   const onPressAddItem = () => {
+    onInsert(text);
+    setText("");
     Keyboard.dismiss();
     setActiveInput(true);
   };
 
+  /**
+   * @function onPressShowInputText
+   * @description 키보드에 포커스주기 & 키보드 active상태로 변경하기
+   */
   const onPressShowInputText = () => {
     TextInputRef.current?.focus();
     setActiveInput(false);
   };
+
+  /**
+   * @function onToggle
+   * @description Dim 영역 클릭시 키보드 닫히기
+   */
+  const onToggle = () => {
+    setActiveInput(true);
+  };
   return (
     <>
-      <DimBehindKeyboardExample active={!activeInputStyle} />
+      <DimBehindKeyboardExample
+        active={!activeInputStyle}
+        onToggle={onToggle}
+      />
       <View style={styles.container}>
         <View
           style={[styles.inputContainer, { opacity: activeInputStyle ? 0 : 1 }]}
@@ -37,6 +62,8 @@ function InputBox(): JSX.Element {
           <TextInput
             placeholder="Add a checklist..."
             style={styles.input}
+            value={text}
+            onChangeText={setText}
             ref={TextInputRef}
           ></TextInput>
           <View style={styles.addContainer}>

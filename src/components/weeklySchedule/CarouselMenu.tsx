@@ -31,6 +31,7 @@ function CarouselMenu({ data, onSelectWeek }: CarouselItem): JSX.Element {
   const handleSnapToItem = (index: number) => {
     onSelectWeek(index + 1);
     setActiveIndex(index);
+    console.log(index);
   };
 
   return (
