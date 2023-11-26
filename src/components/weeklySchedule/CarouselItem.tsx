@@ -1,19 +1,18 @@
 import { StyleSheet, Text, View } from "react-native";
 
-interface IWeeklyItem {
-  step: string;
+interface CarouselWeekItem {
+  weekNumber: string;
   active: boolean;
 }
 
-function CarouselItem(props: IWeeklyItem): JSX.Element {
-  const { step, active } = props;
+function CarouselItem({ active, weekNumber }: CarouselWeekItem): JSX.Element {
   return (
     <View style={[styles.container, active && styles.activeState]}>
       <Text style={[styles.smallText, active && styles.activeFontColor]}>
         week
       </Text>
       <Text style={[styles.emphasisText, active && styles.activeFontColor]}>
-        {step}
+        {weekNumber}
       </Text>
     </View>
   );
