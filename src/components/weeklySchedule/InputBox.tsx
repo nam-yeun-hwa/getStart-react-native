@@ -27,8 +27,10 @@ function InputBox({ onInsert }: InputBoxProps): JSX.Element {
    * @description 키보드 입력 버튼 누르면 내용 리스트에 추가 되도록 구현 및 키보드 빈 스트링으로 초기화
    */
   const onPressAddItem = () => {
-    onInsert(text);
-    setText("");
+    if (text.length > 0) {
+      onInsert(text);
+      setText("");
+    }
     Keyboard.dismiss();
     setActiveInput(true);
   };
@@ -46,14 +48,15 @@ function InputBox({ onInsert }: InputBoxProps): JSX.Element {
    * @function onToggle
    * @description Dim 영역 클릭시 키보드 닫히기
    */
-  const onToggle = () => {
+  const onDimToggle = () => {
     setActiveInput(true);
   };
+
   return (
     <>
       <DimBehindKeyboardExample
         active={!activeInputStyle}
-        onToggle={onToggle}
+        onToggle={onDimToggle}
       />
       <View style={styles.container}>
         <View
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: "row",
-    backgroundColor: "white",
+    backgroundColor: "red",
   },
   showBtn: {
     height: 52,

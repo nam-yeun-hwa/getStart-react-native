@@ -1,37 +1,23 @@
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import ListItem from "./ListItem";
 
 interface UserWeeklyData {
   id: number;
   weekNumber: number;
   content: string;
+  done: boolean;
 }
 
 interface PropsUserWeeklyData {
   data: Array<UserWeeklyData>;
+  onDone: (id: number) => void;
+  onRemove: (id: number) => void;
 }
 
-function List({ data }: PropsUserWeeklyData) {
-  const renderItem = ({ item }: { item: UserWeeklyData }) => (
-    <View style={styles.container}>
-      <View style={styles.item}>
-        {/* <View style={styles.check}>
-          <Image
-            source={require("../../assets/icon/ico_check.png")}
-            style={styles.iconCheck}
-          />
-        </View> */}
-        <Text style={styles.txt} numberOfLines={2} ellipsizeMode="tail">
-          {item.content}
-        </Text>
-        <View style={styles.del}>
-          <Image
-            source={require("../../assets/icon/ico_minus.png")}
-            style={styles.iconMinus}
-          ></Image>
-        </View>
-      </View>
-    </View>
-  );
+function List({ data, onDone, onRemove }: PropsUserWeeklyData) {
+  const renderItem = ({ item }: { item: UserWeeklyData }) => {
+    return <ListItem item={item} onDone={onDone} onRemove={onRemove} />;
+  };
 
   return (
     <FlatList

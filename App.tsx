@@ -11,7 +11,7 @@ import Header from "./src/components/layout/Header";
 import CarouselMenu from "./src/components/weeklySchedule/CarouselMenu";
 import WarningNoPost from "./src/components/warningSign/WarningNoPost";
 import InputBox from "./src/components/weeklySchedule/InputBox";
-import UserWeekSchedule from "./src/components/weeklySchedule/UserWeekSchedule";
+import WeekContent from "./src/components/weeklySchedule/WeekContent";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 interface WeekItem {
@@ -255,11 +255,12 @@ function App(): JSX.Element {
   ]);
 
   const [currentIndex, setCurrentIndex] = useState(1);
+  const weeklyTotal = [...new Set(weeklyList.map((v) => v.weekNumber))];
 
   /**
    * @function onSelectWeek
    * @param select 선택된 week
-   * @deprecated 캐러셀에서 현재 선택된 index
+   * @description 캐러셀에서 현재 선택된 index
    */
   const onSelectWeek = (select: number) => {
     setCurrentIndex(select);
@@ -283,6 +284,29 @@ function App(): JSX.Element {
     setWeeklyList(weeklyList.concat(weekItem));
   };
 
+  /**
+   * @function onDoneToggle
+   * @param id
+   * @description 리스트아이템 완료 체크
+   */
+  const onDone = (id: number) => {
+    console.log(id);
+    const updateData = weeklyList.map((v) =>
+      v.id === id ? { ...v, done: !v.done } : v
+    );
+
+    setWeeklyList(updateData);
+  };
+
+  /**
+   * @function onRemoveItem
+   * @param id
+   * @description 리스트 아이템 삭제
+   */
+  const onRemove = (id: number) => {
+    console.log(id);
+  };
+
   return (
     <>
       <SafeAreaProvider>
@@ -292,15 +316,14 @@ function App(): JSX.Element {
             style={styles.avoid}
           >
             <Header />
-            <CarouselMenu
-              data={[...new Set(weeklyList.map((v) => v.weekNumber))]}
-              onSelectWeek={onSelectWeek}
-            />
+            <CarouselMenu data={weeklyTotal} onSelectWeek={onSelectWeek} />
             {weeklyList.length === 0 ? (
               <WarningNoPost />
             ) : (
-              <UserWeekSchedule
+              <WeekContent
                 data={weeklyList.filter((v) => v.weekNumber === currentIndex)}
+                onDone={onDone}
+                onRemove={onRemove}
               />
             )}
 
