@@ -6,19 +6,13 @@
  */
 
 import React, { useState } from "react";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-} from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import Header from "./src/components/layout/Header";
 import CarouselMenu from "./src/components/weeklySchedule/CarouselMenu";
 import WarningNoPost from "./src/components/warningSign/WarningNoPost";
 import InputBox from "./src/components/weeklySchedule/InputBox";
-import List from "./src/components/weeklySchedule/List";
 import UserWeekSchedule from "./src/components/weeklySchedule/UserWeekSchedule";
-import Dim from "./src/components/weeklySchedule/Dim";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 function App(): JSX.Element {
   const [weeklyList, setWeeklyList] = useState([
@@ -467,22 +461,24 @@ function App(): JSX.Element {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView
-          behavior={Platform.select({ ios: "padding" })}
-          style={styles.avoid}
-        >
-          <Header />
-          <CarouselMenu />
-          {sample.length === 0 ? (
-            <WarningNoPost />
-          ) : (
-            <UserWeekSchedule data={sample} />
-          )}
+      <SafeAreaProvider>
+        <SafeAreaView style={styles.container} edges={["bottom"]}>
+          <KeyboardAvoidingView
+            behavior={Platform.select({ ios: "padding" })}
+            style={styles.avoid}
+          >
+            <Header />
+            <CarouselMenu />
+            {sample.length === 0 ? (
+              <WarningNoPost />
+            ) : (
+              <UserWeekSchedule data={sample} />
+            )}
 
-          <InputBox />
-        </KeyboardAvoidingView>
-      </SafeAreaView>
+            <InputBox />
+          </KeyboardAvoidingView>
+        </SafeAreaView>
+      </SafeAreaProvider>
     </>
   );
 }
