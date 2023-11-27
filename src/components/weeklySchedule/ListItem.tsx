@@ -22,10 +22,17 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
         {mode === ACTIVE_MODE.EDIT && (
           <TouchableOpacity onPress={() => onDone(item.id)}>
             <View style={[styles.checkBasic, item.done && styles.done]}>
-              <Image
-                source={require("../../assets/icon/ico_check.png")}
-                style={styles.iconCheck}
-              />
+              {item.done ? (
+                <Image
+                  source={require("../../assets/icon/ico_check_active.png")}
+                  style={styles.iconCheck}
+                />
+              ) : (
+                <Image
+                  source={require("../../assets/icon/ico_check_basic.png")}
+                  style={styles.iconCheck}
+                />
+              )}
             </View>
           </TouchableOpacity>
         )}
