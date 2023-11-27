@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ACTIVE_MODE } from "../../constants/constant";
 
 interface UserWeeklyData {
   id: number;
@@ -9,22 +10,26 @@ interface UserWeeklyData {
 
 interface WeeklyItemProps {
   item: UserWeeklyData;
+  mode: ACTIVE_MODE;
   onDone: (id: number) => void;
   onRemove: (id: number) => void;
 }
 
-function ListItem({ item, onDone, onRemove }: WeeklyItemProps) {
+function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
   return (
     <View style={styles.container}>
       <View style={styles.item}>
-        {/* <TouchableOpacity onPress={() => onDone(item.id)}>
-          <View style={[styles.checkBasic, item.done && styles.done]}>
-            <Image
-              source={require("../../assets/icon/ico_check.png")}
-              style={styles.iconCheck}
-            />
-          </View>
-        </TouchableOpacity> */}
+        {mode === ACTIVE_MODE.EDIT && (
+          <TouchableOpacity onPress={() => onDone(item.id)}>
+            <View style={[styles.checkBasic, item.done && styles.done]}>
+              <Image
+                source={require("../../assets/icon/ico_check.png")}
+                style={styles.iconCheck}
+              />
+            </View>
+          </TouchableOpacity>
+        )}
+
         <Text
           style={[styles.txt, item.done && styles.lineThrough]}
           numberOfLines={2}
@@ -32,14 +37,17 @@ function ListItem({ item, onDone, onRemove }: WeeklyItemProps) {
         >
           {item.content}
         </Text>
-        <TouchableOpacity onPress={() => onRemove(item.id)}>
-          <View style={styles.del}>
-            <Image
-              source={require("../../assets/icon/ico_minus.png")}
-              style={styles.iconMinus}
-            ></Image>
-          </View>
-        </TouchableOpacity>
+
+        {mode === ACTIVE_MODE.DONE && (
+          <TouchableOpacity onPress={() => onRemove(item.id)}>
+            <View style={styles.del}>
+              <Image
+                source={require("../../assets/icon/ico_minus.png")}
+                style={styles.iconMinus}
+              ></Image>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

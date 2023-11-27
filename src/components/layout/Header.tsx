@@ -8,14 +8,22 @@ import {
 } from "react-native";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ACTIVE_MODE } from "../../constants/constant";
 
 interface HeaderProps {
-  editMode: boolean;
-  onModeToggle: () => void;
+  editMode: ACTIVE_MODE;
+  onModeToggle: (active: ACTIVE_MODE) => void;
 }
 
 function Header({ editMode, onModeToggle }: HeaderProps): JSX.Element {
   const { top } = useSafeAreaInsets();
+
+  const onActiveMode = () => {
+    console.log("s");
+    let active =
+      editMode === ACTIVE_MODE.EDIT ? ACTIVE_MODE.DONE : ACTIVE_MODE.EDIT;
+    onModeToggle(active);
+  };
   return (
     <>
       <View style={[styles.statusBarPlaceholder, { height: top }]}></View>
@@ -23,9 +31,9 @@ function Header({ editMode, onModeToggle }: HeaderProps): JSX.Element {
       <View style={styles.container}>
         <Text style={styles.fonts}>Checklists</Text>
 
-        <TouchableOpacity onPress={onModeToggle} style={styles.mode}>
+        <TouchableOpacity onPress={onActiveMode} style={styles.mode}>
           <View style={styles.mode}>
-            <Text>{editMode ? "Edit" : "Done"}</Text>
+            <Text>{editMode === ACTIVE_MODE.EDIT ? "Edit" : "Done"}</Text>
           </View>
         </TouchableOpacity>
       </View>

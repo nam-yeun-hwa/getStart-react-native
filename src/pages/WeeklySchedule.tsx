@@ -7,6 +7,7 @@ import CarouselMenu from "../components/weeklySchedule/CarouselMenu";
 import WarningNoPost from "../components/warningSign/WarningNoPost";
 import WeekContent from "../components/weeklySchedule/WeekContent";
 import InputBox from "../components/weeklySchedule/InputBox";
+import { ACTIVE_MODE } from "../constants/constant";
 
 function WeeklySchedule() {
   const [weeklyList, setWeeklyList] = useState([
@@ -243,7 +244,7 @@ function WeeklySchedule() {
 
   const [currentIndex, setCurrentIndex] = useState(1);
   const weeklyTotal = [...new Set(weeklyList.map((v) => v.weekNumber))];
-  const [editMode, setEditMode] = useState(true);
+  const [editMode, setEditMode] = useState<ACTIVE_MODE>(ACTIVE_MODE.EDIT);
 
   /**
    * @function onSelectWeek
@@ -297,8 +298,8 @@ function WeeklySchedule() {
     setWeeklyList(updateDelItem);
   };
 
-  const onModeToggle = () => {
-    setEditMode(!editMode);
+  const onModeToggle = (activeMode: ACTIVE_MODE) => {
+    setEditMode(activeMode);
   };
   return (
     <>
@@ -317,6 +318,7 @@ function WeeklySchedule() {
                 data={weeklyList
                   .filter((v) => v.weekNumber === currentIndex)
                   .reverse()}
+                mode={editMode}
                 onDone={onDone}
                 onRemove={onRemove}
               />
