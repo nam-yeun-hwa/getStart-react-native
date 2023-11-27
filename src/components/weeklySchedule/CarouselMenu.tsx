@@ -9,7 +9,7 @@ interface CarouselItem {
   onSelectWeek: (select: number) => void;
 }
 
-function CarouselMenu({ data, onSelectWeek }: CarouselItem): JSX.Element {
+function CarouselMenu({ data, onSelectWeek }: CarouselItem) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const width = Dimensions.get("window").width;

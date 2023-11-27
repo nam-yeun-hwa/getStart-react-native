@@ -15,11 +15,7 @@ interface PropsUserWeeklyData {
   onRemove: (id: number) => void;
 }
 
-function WeekContent({
-  data,
-  onDone,
-  onRemove,
-}: PropsUserWeeklyData): JSX.Element {
+function WeekContent({ data, onDone, onRemove }: PropsUserWeeklyData) {
   const [step, setStep] = useState(1);
   return (
     <>

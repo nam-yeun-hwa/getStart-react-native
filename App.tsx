@@ -285,26 +285,28 @@ function App(): JSX.Element {
   };
 
   /**
-   * @function onDoneToggle
+   * @function onDone
    * @param id
    * @description 리스트아이템 완료 체크
    */
   const onDone = (id: number) => {
     console.log(id);
-    const updateData = weeklyList.map((v) =>
+    const updateDoneItem = weeklyList.map((v) =>
       v.id === id ? { ...v, done: !v.done } : v
     );
 
-    setWeeklyList(updateData);
+    setWeeklyList(updateDoneItem);
   };
 
   /**
-   * @function onRemoveItem
+   * @function onRemove
    * @param id
    * @description 리스트 아이템 삭제
    */
   const onRemove = (id: number) => {
     console.log(id);
+    const updateDelItem = weeklyList.filter((v) => v.id !== id);
+    setWeeklyList(updateDelItem);
   };
 
   return (
@@ -321,12 +323,13 @@ function App(): JSX.Element {
               <WarningNoPost />
             ) : (
               <WeekContent
-                data={weeklyList.filter((v) => v.weekNumber === currentIndex)}
+                data={weeklyList
+                  .filter((v) => v.weekNumber === currentIndex)
+                  .reverse()}
                 onDone={onDone}
                 onRemove={onRemove}
               />
             )}
-
             <InputBox onInsert={onInsert} />
           </KeyboardAvoidingView>
         </SafeAreaView>

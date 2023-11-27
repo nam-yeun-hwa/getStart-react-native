@@ -17,14 +17,14 @@ function ListItem({ item, onDone, onRemove }: WeeklyItemProps) {
   return (
     <View style={styles.container}>
       <View style={styles.item}>
-        <TouchableOpacity onPress={() => onDone(item.id)}>
+        {/* <TouchableOpacity onPress={() => onDone(item.id)}>
           <View style={[styles.checkBasic, item.done && styles.done]}>
             <Image
               source={require("../../assets/icon/ico_check.png")}
               style={styles.iconCheck}
             />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <Text
           style={[styles.txt, item.done && styles.lineThrough]}
           numberOfLines={2}
@@ -32,12 +32,14 @@ function ListItem({ item, onDone, onRemove }: WeeklyItemProps) {
         >
           {item.content}
         </Text>
-        {/* <View style={styles.del}>
-              <Image
-                source={require("../../assets/icon/ico_minus.png")}
-                style={styles.iconMinus}
-              ></Image>
-            </View> */}
+        <TouchableOpacity onPress={() => onRemove(item.id)}>
+          <View style={styles.del}>
+            <Image
+              source={require("../../assets/icon/ico_minus.png")}
+              style={styles.iconMinus}
+            ></Image>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

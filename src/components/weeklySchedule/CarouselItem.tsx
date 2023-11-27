@@ -5,7 +5,7 @@ interface CarouselWeekItem {
   active: boolean;
 }
 
-function CarouselItem({ active, weekNumber }: CarouselWeekItem): JSX.Element {
+function CarouselItem({ active, weekNumber }: CarouselWeekItem) {
   return (
     <View style={[styles.container, active && styles.activeState]}>
       <Text style={[styles.smallText, active && styles.activeFontColor]}>

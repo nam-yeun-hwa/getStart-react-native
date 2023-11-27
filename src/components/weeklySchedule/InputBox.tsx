@@ -17,7 +17,7 @@ import DimBehindKeyboardExample from "./Dim";
 interface InputBoxProps {
   onInsert: (text: string) => void;
 }
-function InputBox({ onInsert }: InputBoxProps): JSX.Element {
+function InputBox({ onInsert }: InputBoxProps) {
   const TextInputRef = useRef<TextInput | null>(null);
   const [activeInputStyle, setActiveInput] = useState(true);
   const [text, setText] = useState("");
