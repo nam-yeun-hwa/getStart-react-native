@@ -29,7 +29,10 @@ function WeekContent({ data, mode, onDone, onRemove }: PropsUserWeeklyData) {
 
   return (
     <>
-      <ProgressBar totalStep={data.length} nowStep={step} />
+      <ProgressBar
+        totalStep={data.length}
+        nowStep={data.filter((v) => v.done).length}
+      />
       <FlatList
         style={styles.container}
         data={data}
