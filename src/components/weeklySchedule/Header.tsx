@@ -15,7 +15,7 @@ interface HeaderProps {
   onModeToggle: (active: ACTIVE_MODE) => void;
 }
 
-function Header({ editMode, onModeToggle }: HeaderProps): JSX.Element {
+function Header({ editMode, onModeToggle }: HeaderProps) {
   const { top } = useSafeAreaInsets();
 
   const onActiveMode = () => {

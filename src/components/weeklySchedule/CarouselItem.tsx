@@ -1,20 +1,34 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableNativeFeedback, View } from "react-native";
 
-interface CarouselWeekItem {
-  weekNumber: string;
+export interface CarouselWeekItem {
+  weekNumber: number;
   active: boolean;
+  onClickIndex: (index: number) => void;
 }
 
-function CarouselItem({ active, weekNumber }: CarouselWeekItem) {
+/**
+ * CarouselItem 컴포넌트
+ * @description 캐러셀되는 아이템
+ */
+function CarouselItem({ active, weekNumber, onClickIndex }: CarouselWeekItem) {
+  /**
+   * @function onSnapToItem
+   * @description 캐러셀 아이템 클릭시 인덱스 값을 부모에게 전달
+   */
+  const onSnapToItem = () => {
+    onClickIndex(weekNumber);
+  };
   return (
-    <View style={[styles.container, active && styles.activeState]}>
-      <Text style={[styles.smallText, active && styles.activeFontColor]}>
-        week
-      </Text>
-      <Text style={[styles.emphasisText, active && styles.activeFontColor]}>
-        {weekNumber}
-      </Text>
-    </View>
+    <TouchableNativeFeedback onPress={onSnapToItem}>
+      <View style={[styles.container, active && styles.activeState]}>
+        <Text style={[styles.smallText, active && styles.activeFontColor]}>
+          week
+        </Text>
+        <Text style={[styles.emphasisText, active && styles.activeFontColor]}>
+          {weekNumber}
+        </Text>
+      </View>
+    </TouchableNativeFeedback>
   );
 }
 

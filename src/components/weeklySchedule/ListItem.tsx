@@ -29,6 +29,10 @@ interface WeeklyItemProps {
   onRemove: (id: number) => void;
 }
 
+/**
+ * ListItem 컴포넌트
+ * Week마다 개별 아이템
+ */
 function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
   const width = Dimensions.get("window").width + 500;
 
@@ -40,8 +44,10 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
     };
   });
 
+  /**
+   * @description 헤더의 오른쪽 EDIT와 DONE 모드에 따라서 애니메이션 값을 변경
+   */
   useEffect(() => {
-    console.log(mode);
     if (mode === ACTIVE_MODE.DONE) {
       translateX.value = withTiming(-44, {
         duration: 150,
@@ -58,15 +64,8 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
   return (
     <Animated.View style={[, styles.container, animatedStyle]}>
       <View style={[{ width: width }, styles.item]}>
-        {/* {mode === ACTIVE_MODE.EDIT && ( */}
         <TouchableOpacity onPress={() => onDone(item.id)}>
-          <View
-            style={[
-              styles.checkBasic,
-              item.done && styles.done,
-              // mode === ACTIVE_MODE.EDIT && { marginLeft: 8 },
-            ]}
-          >
+          <View style={[styles.checkBasic, item.done && styles.done]}>
             {item.done ? (
               <Image
                 source={require("../../assets/icon/ico_check_active.png")}
@@ -80,8 +79,6 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
             )}
           </View>
         </TouchableOpacity>
-        {/* )} */}
-
         <Text
           style={[
             { width: width * 0.342 },
@@ -94,7 +91,6 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
           {item.content}
         </Text>
 
-        {/* {mode === ACTIVE_MODE.DONE && ( */}
         <TouchableOpacity onPress={() => onRemove(item.id)}>
           <View style={styles.del}>
             <Image
@@ -103,7 +99,6 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
             ></Image>
           </View>
         </TouchableOpacity>
-        {/* )} */}
       </View>
     </Animated.View>
   );

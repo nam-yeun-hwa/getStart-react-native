@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import Header from "../components/layout/Header";
+import Header from "../components/weeklySchedule/Header";
 import CarouselMenu from "../components/weeklySchedule/CarouselMenu";
 import WarningNoPost from "../components/warningSign/WarningNoPost";
 import WeekContent from "../components/weeklySchedule/WeekContent";
@@ -247,6 +247,9 @@ function WeeklySchedule() {
   const [editMode, setEditMode] = useState<ACTIVE_MODE>(ACTIVE_MODE.EDIT);
   const [slideDrection, setSlideDrection] = useState(1);
 
+  /**
+   * @description 페이지가 언마운트 될때 Active 였던 인덱스를 저장
+   */
   useEffect(() => {
     return () => {
       setSlideDrection(currentIndex);
@@ -286,11 +289,9 @@ function WeeklySchedule() {
    * @description 리스트아이템 완료 체크
    */
   const onDone = (id: number) => {
-    console.log(id);
     const updateDoneItem = weeklyList.map((v) =>
       v.id === id ? { ...v, done: !v.done } : v
     );
-
     setWeeklyList(updateDoneItem);
   };
 
@@ -300,11 +301,14 @@ function WeeklySchedule() {
    * @description 리스트 아이템 삭제
    */
   const onRemove = (id: number) => {
-    console.log(id);
     const updateDelItem = weeklyList.filter((v) => v.id !== id);
     setWeeklyList(updateDelItem);
   };
 
+  /**
+   * @description 헤더의 오른쪽 EDIT와 DONE 모드를 구분
+   * @param activeMode
+   */
   const onModeToggle = (activeMode: ACTIVE_MODE) => {
     setEditMode(activeMode);
   };

@@ -15,6 +15,11 @@ import DimBehindKeyboardExample from "./Dim";
 interface InputBoxProps {
   onInsert: (text: string) => void;
 }
+
+/**
+ * InputBox 컴포넌트
+ *@description 게시물 항목 추가 관련 컴포넌트
+ */
 function InputBox({ onInsert }: InputBoxProps) {
   const TextInputRef = useRef<TextInput | null>(null);
   const [activeInputStyle, setActiveInput] = useState(true);
@@ -22,7 +27,7 @@ function InputBox({ onInsert }: InputBoxProps) {
 
   /**
    * @function onPressAddItem
-   * @description 키보드 입력 버튼 누르면 내용 리스트에 추가 되도록 구현 및 키보드 빈 스트링으로 초기화
+   * @description 키보드 입력시 리스트에 추가 및 키보드 빈 스트링으로 초기화
    */
   const onPressAddItem = () => {
     if (text.length > 0) {
@@ -35,7 +40,7 @@ function InputBox({ onInsert }: InputBoxProps) {
 
   /**
    * @function onPressShowInputText
-   * @description 키보드에 포커스주기 & 키보드 active상태로 변경하기
+   * @description 키보드에 포커스주기 & 키보드 active상태로 변경
    */
   const onPressShowInputText = () => {
     TextInputRef.current?.focus();

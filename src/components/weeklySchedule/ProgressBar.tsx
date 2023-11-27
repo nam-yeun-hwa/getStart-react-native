@@ -6,6 +6,10 @@ interface Step {
   nowStep: number;
 }
 
+/**
+ * ProgressBar 컴포넌트
+ *@description  프로그레스 바 관련
+ */
 function ProgressBar({ totalStep, nowStep }: Step) {
   const loaderValue = useRef(new Animated.Value(0)).current;
 
@@ -25,7 +29,7 @@ function ProgressBar({ totalStep, nowStep }: Step) {
 
   useEffect(() => {
     load(nowStep);
-  }, [nowStep]);
+  }, [nowStep, totalStep]);
 
   return (
     <View style={styles.container}>
@@ -33,6 +37,7 @@ function ProgressBar({ totalStep, nowStep }: Step) {
         <Text style={styles.txt}>
           {totalStep} of {nowStep} completed
         </Text>
+
         <Text style={styles.percent}>
           {Math.floor((nowStep / totalStep) * 100)}%
         </Text>
@@ -52,7 +57,6 @@ function ProgressBar({ totalStep, nowStep }: Step) {
 }
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "red",
     marginHorizontal: 20,
     marginBottom: 36,
   },

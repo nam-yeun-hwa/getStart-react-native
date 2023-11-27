@@ -1,6 +1,10 @@
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
-function WarningNoPost(): JSX.Element {
+/**
+ * WarningNoPost 컴포넌트
+ * @description 빈 리스트 일때 사용
+ */
+function WarningNoPost() {
   const screenWidth = Dimensions.get("window").width;
 
   return (

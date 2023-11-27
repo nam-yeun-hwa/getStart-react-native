@@ -25,6 +25,10 @@ interface PropsUserWeeklyData {
   onRemove: (id: number) => void;
 }
 
+/**
+ * WeekContent 컴포넌트
+ * @description 주관련 전체 리스트 컨텐츠
+ */
 function WeekContent({
   data,
   mode,
@@ -32,6 +36,9 @@ function WeekContent({
   onDone,
   onRemove,
 }: PropsUserWeeklyData) {
+  /**
+   * @description 애니메이션 초기 값 설정
+   */
   const translateX = useSharedValue(-800);
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -40,10 +47,16 @@ function WeekContent({
     };
   });
 
+  /**
+   * @@description Xposition 애니메이션
+   */
   useEffect(() => {
     translateX.value = withTiming(0, { duration: 600, easing: Easing.ease }); // 애니메이션 등장
   }, [data]);
 
+  /**
+   * @@description 리스트 Xposition 초기값 설정
+   */
   useEffect(() => {
     return () => {
       if (slideDirection > 0) {
@@ -80,7 +93,6 @@ function WeekContent({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // width: "130%",
   },
 
   item: {

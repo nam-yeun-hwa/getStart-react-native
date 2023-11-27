@@ -13,7 +13,15 @@ interface DimActive {
   onToggle: () => void;
 }
 
+/**
+ * DimBehindKeyboardExample 컴포넌트
+ * @description 키보드 오픈시 DIm 영역
+ */
 const DimBehindKeyboardExample = ({ active, onToggle }: DimActive) => {
+  /**
+   * @function onPress
+   * @description 딤영역을 클릭하면 키보드가 닫기
+   */
   const onPress = () => {
     Keyboard.dismiss();
     onToggle();
