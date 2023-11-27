@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ProgressBar from "./ProgressBar";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import ListItem from "./ListItem";
 import { ACTIVE_MODE } from "../../constants/constant";
 import Animated, {
@@ -66,6 +66,7 @@ function WeekContent({
         totalStep={data.length}
         nowStep={data.filter((v) => v.done).length}
       />
+
       <FlatList
         style={styles.container}
         data={data}
@@ -79,6 +80,7 @@ function WeekContent({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // width: "130%",
   },
 
   item: {

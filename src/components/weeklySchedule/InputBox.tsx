@@ -1,10 +1,8 @@
 import { useRef, useState } from "react";
 import {
-  Button,
   Image,
   Keyboard,
   Platform,
-  StatusBar,
   StyleSheet,
   TextInput,
   TouchableOpacity,
@@ -58,10 +56,8 @@ function InputBox({ onInsert }: InputBoxProps) {
         active={!activeInputStyle}
         onToggle={onDimToggle}
       />
-      <View style={styles.container}>
-        <View
-          style={[styles.inputContainer, { opacity: activeInputStyle ? 0 : 1 }]}
-        >
+      <View style={[styles.container, { opacity: activeInputStyle ? 0 : 1 }]}>
+        <View style={[styles.inputContainer]}>
           <TextInput
             placeholder="Add a checklist..."
             style={styles.input}
@@ -73,7 +69,7 @@ function InputBox({ onInsert }: InputBoxProps) {
             {Platform.select({
               ios: (
                 <TouchableWithoutFeedback onPress={onPressAddItem}>
-                  <View style={styles.addButton}>
+                  <View style={styles.writeBtn}>
                     <Image
                       source={require("../../assets/icon/ico_arrow_up.png")}
                       style={styles.arrow}
@@ -85,23 +81,24 @@ function InputBox({ onInsert }: InputBoxProps) {
           </View>
         </View>
       </View>
-
-      {activeInputStyle &&
-        Platform.select({
-          ios: (
-            <TouchableOpacity
-              onPress={onPressShowInputText}
-              activeOpacity={0.5}
-            >
-              <View style={styles.showBtn}>
-                <Image
-                  source={require("../../assets/icon/ico_add_weekly_item.png")}
-                  resizeMode="contain"
-                ></Image>
-              </View>
-            </TouchableOpacity>
-          ),
-        })}
+      <View style={styles.btnContainer}>
+        {activeInputStyle &&
+          Platform.select({
+            ios: (
+              <TouchableOpacity
+                onPress={onPressShowInputText}
+                activeOpacity={0.5}
+              >
+                <View style={styles.showBtn}>
+                  <Image
+                    source={require("../../assets/icon/ico_add_weekly_item.png")}
+                    resizeMode="contain"
+                  ></Image>
+                </View>
+              </TouchableOpacity>
+            ),
+          })}
+      </View>
     </>
   );
 }
@@ -112,17 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: "row",
-    backgroundColor: "red",
-  },
-  showBtn: {
-    height: 52,
-    width: 52,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 50,
-    backgroundColor: "#44CEC6",
-    marginBottom: 20,
-    marginRight: 20,
+    backgroundColor: "white",
   },
 
   inputContainer: {
@@ -163,7 +150,8 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 8,
     paddingRight: 5,
   },
-  addButton: {
+
+  writeBtn: {
     width: 32,
     height: 32,
     alignItems: "center",
@@ -171,9 +159,32 @@ const styles = StyleSheet.create({
     backgroundColor: "#44CEC6",
     borderRadius: 12.4,
   },
+
   arrow: {
     width: 18,
     height: 18,
+  },
+
+  btnContainer: {
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    width: "100%",
+    justifyContent: "flex-end",
+  },
+
+  showBtn: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    height: 52,
+    width: 52,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 50,
+    backgroundColor: "#44CEC6",
+    marginBottom: 20,
+    marginRight: 20,
   },
 });
 

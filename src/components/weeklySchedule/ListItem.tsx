@@ -1,5 +1,19 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { ACTIVE_MODE } from "../../constants/constant";
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import { useEffect } from "react";
 
 interface UserWeeklyData {
   id: number;
@@ -16,47 +30,82 @@ interface WeeklyItemProps {
 }
 
 function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
+  const width = Dimensions.get("window").width + 500;
+
+  const translateX = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: translateX.value }],
+    };
+  });
+
+  useEffect(() => {
+    console.log(mode);
+    if (mode === ACTIVE_MODE.DONE) {
+      translateX.value = withTiming(-44, {
+        duration: 150,
+        easing: Easing.ease,
+      }); // 애니메이션 등장
+    } else {
+      translateX.value = withTiming(0, {
+        duration: 150,
+        easing: Easing.ease,
+      }); // 애니메이션 등장
+    }
+  }, [mode]);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.item}>
-        {mode === ACTIVE_MODE.EDIT && (
-          <TouchableOpacity onPress={() => onDone(item.id)}>
-            <View style={[styles.checkBasic, item.done && styles.done]}>
-              {item.done ? (
-                <Image
-                  source={require("../../assets/icon/ico_check_active.png")}
-                  style={styles.iconCheck}
-                />
-              ) : (
-                <Image
-                  source={require("../../assets/icon/ico_check_basic.png")}
-                  style={styles.iconCheck}
-                />
-              )}
-            </View>
-          </TouchableOpacity>
-        )}
+    <Animated.View style={[, styles.container, animatedStyle]}>
+      <View style={[{ width: width }, styles.item]}>
+        {/* {mode === ACTIVE_MODE.EDIT && ( */}
+        <TouchableOpacity onPress={() => onDone(item.id)}>
+          <View
+            style={[
+              styles.checkBasic,
+              item.done && styles.done,
+              // mode === ACTIVE_MODE.EDIT && { marginLeft: 8 },
+            ]}
+          >
+            {item.done ? (
+              <Image
+                source={require("../../assets/icon/ico_check_active.png")}
+                style={styles.iconCheck}
+              />
+            ) : (
+              <Image
+                source={require("../../assets/icon/ico_check_basic.png")}
+                style={styles.iconCheck}
+              />
+            )}
+          </View>
+        </TouchableOpacity>
+        {/* )} */}
 
         <Text
-          style={[styles.txt, item.done && styles.lineThrough]}
+          style={[
+            { width: width * 0.342 },
+            styles.txt,
+            item.done && styles.lineThrough,
+          ]}
           numberOfLines={2}
           ellipsizeMode="tail"
         >
           {item.content}
         </Text>
 
-        {mode === ACTIVE_MODE.DONE && (
-          <TouchableOpacity onPress={() => onRemove(item.id)}>
-            <View style={styles.del}>
-              <Image
-                source={require("../../assets/icon/ico_minus.png")}
-                style={styles.iconMinus}
-              ></Image>
-            </View>
-          </TouchableOpacity>
-        )}
+        {/* {mode === ACTIVE_MODE.DONE && ( */}
+        <TouchableOpacity onPress={() => onRemove(item.id)}>
+          <View style={styles.del}>
+            <Image
+              source={require("../../assets/icon/ico_minus.png")}
+              style={styles.iconMinus}
+            ></Image>
+          </View>
+        </TouchableOpacity>
+        {/* )} */}
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
@@ -66,6 +115,7 @@ const styles = StyleSheet.create({
   },
 
   item: {
+    // width: "100%",
     flexWrap: "wrap",
     flexDirection: "row",
     marginBottom: 10,
@@ -109,11 +159,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF5146",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 8,
+    marginLeft: 20,
   },
 
   txt: {
-    width: "89.2%",
+    // width: "89.2%",
     fontSize: 14,
     lineHeight: 21,
     marginVertical: 5,
