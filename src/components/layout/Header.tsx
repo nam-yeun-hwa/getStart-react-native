@@ -19,7 +19,6 @@ function Header({ editMode, onModeToggle }: HeaderProps): JSX.Element {
   const { top } = useSafeAreaInsets();
 
   const onActiveMode = () => {
-    console.log("s");
     let active =
       editMode === ACTIVE_MODE.EDIT ? ACTIVE_MODE.DONE : ACTIVE_MODE.EDIT;
     onModeToggle(active);

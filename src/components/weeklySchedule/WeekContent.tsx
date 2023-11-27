@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProgressBar from "./ProgressBar";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import ListItem from "./ListItem";
 import { ACTIVE_MODE } from "../../constants/constant";
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 interface UserWeeklyData {
   id: number;
@@ -14,12 +20,39 @@ interface UserWeeklyData {
 interface PropsUserWeeklyData {
   data: Array<UserWeeklyData>;
   mode: ACTIVE_MODE;
+  slideDirection: number;
   onDone: (id: number) => void;
   onRemove: (id: number) => void;
 }
 
-function WeekContent({ data, mode, onDone, onRemove }: PropsUserWeeklyData) {
-  const [step, setStep] = useState(1);
+function WeekContent({
+  data,
+  mode,
+  slideDirection,
+  onDone,
+  onRemove,
+}: PropsUserWeeklyData) {
+  const translateX = useSharedValue(-800);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: translateX.value }],
+    };
+  });
+
+  useEffect(() => {
+    translateX.value = withTiming(0, { duration: 600, easing: Easing.ease }); // 애니메이션 등장
+  }, [data]);
+
+  useEffect(() => {
+    return () => {
+      if (slideDirection > 0) {
+        translateX.value = 800;
+      } else {
+        translateX.value = -800;
+      }
+    };
+  }, [slideDirection]);
 
   const renderItem = ({ item }: { item: UserWeeklyData }) => {
     return (
@@ -28,7 +61,7 @@ function WeekContent({ data, mode, onDone, onRemove }: PropsUserWeeklyData) {
   };
 
   return (
-    <>
+    <Animated.View style={[styles.container, animatedStyle]}>
       <ProgressBar
         totalStep={data.length}
         nowStep={data.filter((v) => v.done).length}
@@ -39,7 +72,7 @@ function WeekContent({ data, mode, onDone, onRemove }: PropsUserWeeklyData) {
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
       />
-    </>
+    </Animated.View>
   );
 }
 

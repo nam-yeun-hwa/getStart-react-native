@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -245,6 +245,13 @@ function WeeklySchedule() {
   const [currentIndex, setCurrentIndex] = useState(1);
   const weeklyTotal = [...new Set(weeklyList.map((v) => v.weekNumber))];
   const [editMode, setEditMode] = useState<ACTIVE_MODE>(ACTIVE_MODE.EDIT);
+  const [slideDrection, setSlideDrection] = useState(1);
+
+  useEffect(() => {
+    return () => {
+      setSlideDrection(currentIndex);
+    };
+  }, [currentIndex]);
 
   /**
    * @function onSelectWeek
@@ -318,6 +325,7 @@ function WeeklySchedule() {
                 data={weeklyList
                   .filter((v) => v.weekNumber === currentIndex)
                   .reverse()}
+                slideDirection={currentIndex - slideDrection}
                 mode={editMode}
                 onDone={onDone}
                 onRemove={onRemove}
