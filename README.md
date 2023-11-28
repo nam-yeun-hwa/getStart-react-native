@@ -1,6 +1,6 @@
 # 진행하면서 나타는 이슈들
 
-## 이슈1
+### 이슈1
 
 ```shell
 npx react-native@latest init frontend-assignment
@@ -17,7 +17,7 @@ Run CLI with --verbose flag for more details.`
 npx react-native@latest init frontend_assignment
 ```
 
-## 이슈 2
+### 이슈 2
 
 상단 Week을 선택하는 메뉴에서 react-native-swiper를 이용하려 하였으나 웹에서 지원되는 속성 예를 들면 `"centeredSlides"` 속성이 `react-native-swiper`에서는 존재하지 않았습니다.
 
@@ -65,7 +65,7 @@ npm install react-native-snap-carousel@4.0.0-beta.6
 
 이 후에는 문제 없이 잘 사용 할 수 있었습니다.
 
-## 이슈 3
+### 이슈 3
 
 react-native-reanimated 을 사용하려고 컴포넌트에 적용중에 아래와 같은 버그가 나타났습니다.
 
@@ -101,7 +101,7 @@ watchman watch-del-all
 
 위 작업으로 해당 에러가 해결 되었습니다.
 
-## 진행하면서 가장 신경써서 작업한 부분
+# 진행하면서 가장 신경써서 작업한 부분
 
 제가 과제를 진행 하면서 가장 신경썻던 부분은 피그마의 디자인 그대로 앱에서 똑같이 느낄수 있었으면 좋겠다고 생각하여 CSS에 신경을 썻고
 동영상으로 보여주신 앱에서 느껴지는 부드러운 화면의 모션감을 그대로 잘 살릴 수 있도록 노력 하였습니다.
