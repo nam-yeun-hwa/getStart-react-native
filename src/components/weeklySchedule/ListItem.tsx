@@ -34,7 +34,7 @@ interface WeeklyItemProps {
  * Week마다 개별 아이템
  */
 function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
-  const width = Dimensions.get("window").width + 500;
+  const width = Dimensions.get("window").width;
 
   const translateX = useSharedValue(0);
 
@@ -80,11 +80,7 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
           </View>
         </TouchableOpacity>
         <Text
-          style={[
-            { width: width * 0.342 },
-            styles.txt,
-            item.done && styles.lineThrough,
-          ]}
+          style={[styles.txt, item.done && styles.lineThrough]}
           numberOfLines={2}
           ellipsizeMode="tail"
         >
@@ -110,8 +106,6 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    // width: "100%",
-    flexWrap: "wrap",
     flexDirection: "row",
     marginBottom: 10,
     marginHorizontal: 20,
@@ -135,7 +129,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 5,
-    marginRight: 12,
+    marginRight: 20,
   },
 
   done: {
@@ -148,20 +142,25 @@ const styles = StyleSheet.create({
   },
 
   del: {
+    position: "absolute",
+    right: 0,
+    top: 0,
     width: 28,
     height: 28,
     borderRadius: 50,
     backgroundColor: "#FF5146",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 20,
+    marginRight: -8,
   },
 
   txt: {
-    // width: "89.2%",
+    flexWrap: "wrap",
+    flex: 1,
     fontSize: 14,
     lineHeight: 21,
     marginVertical: 5,
+    marginRight: 48,
   },
 });
 

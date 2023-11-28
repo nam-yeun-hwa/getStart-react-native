@@ -12,9 +12,10 @@ interface ToastProp {
   message: string;
   isVisible: boolean;
   onUndo: () => void;
+  onClose: () => void;
 }
 
-const Toast = ({ message, isVisible, onUndo }: ToastProp) => {
+const Toast = ({ message, isVisible, onUndo, onClose }: ToastProp) => {
   const opacity = useSharedValue(1);
   const positionY = useSharedValue(60);
 
@@ -25,12 +26,13 @@ const Toast = ({ message, isVisible, onUndo }: ToastProp) => {
       setTimeout(() => {
         opacity.value = withTiming(0, { duration: 1000 });
         positionY.value = withSpring(60, {
-          duration: 600,
+          duration: 1500,
         });
-      }, 10000); // 2초 후에 토스트를 닫음
+        onClose();
+      }, 2000); // 2초 후에 토스트를 닫음
     } else {
       positionY.value = withSpring(60, {
-        duration: 600,
+        duration: 1500,
       });
     }
   }, [isVisible, opacity]);

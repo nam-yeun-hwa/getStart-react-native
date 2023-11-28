@@ -359,6 +359,10 @@ function WeeklySchedule() {
     }
   };
 
+  const onToastClose = () => {
+    setToastVisible(false);
+  };
+
   return (
     <>
       <SafeAreaProvider>
@@ -367,6 +371,7 @@ function WeeklySchedule() {
             message="Checklist deleted"
             isVisible={isToastVisible}
             onUndo={onUndo}
+            onClose={onToastClose}
           />
           <KeyboardAvoidingView
             behavior={Platform.select({ ios: "padding" })}
