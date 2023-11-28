@@ -17,7 +17,7 @@ npx react-native@latest init frontend_assignment
 
 예) https://codesandbox.io/p/sandbox/6gw7p4?file=%2Fsrc%2FApp.jsx%3A17%2C7-26%2C8
 
-`<Swiper
+```<Swiper
     slidesPerView={4}
     spaceBetween={30}
     centeredSlides={true}
@@ -26,7 +26,8 @@ npx react-native@latest init frontend_assignment
     }}
     modules={[Pagination]}
     className="mySwiper"
-/>`
+/>
+```
 
 그리하여 여러가지 라이브러리를 검색하여 그중에 가장 사용자가 많은 라이브러리인 react-native-snap-carousel를 선택 하였습니다.
 
