@@ -8,10 +8,10 @@ npx react-native@latest init frontend-assignment
 
 위 명령어로 프로젝트 생성 중 아래와 같은 버그가 발생 하여 프로젝트 이름을 아래와 같이 변경 하였습니다.
 
-`Please use a valid identifier name (alphanumeric).</br>
+`Please use a valid identifier name (alphanumeric).
 Run CLI with --verbose flag for more details.`
 
-<프로젝트 명울 언더바로 변경>
+<프로젝트 명을 언더바로 변경>
 
 ```shell
 npx react-native@latest init frontend_assignment
@@ -19,7 +19,7 @@ npx react-native@latest init frontend_assignment
 
 ## 이슈 2
 
-상단 Week을 선택하는 메뉴에서 react-native-swiper를 이용하려 하였으나 웹에서 지원되는 속성 예를 들면 "centeredSlides" 속성이 react-native-swiper에서는 존재하지 않았습니다.
+상단 Week을 선택하는 메뉴에서 react-native-swiper를 이용하려 하였으나 웹에서 지원되는 속성 예를 들면 ` "centeredSlides"`` 속성이  `react-native-swiper`에서는 존재하지 않았습니다.
 
 예) https://codesandbox.io/p/sandbox/6gw7p4?file=%2Fsrc%2FApp.jsx%3A17%2C7-26%2C8
 
@@ -36,11 +36,11 @@ npx react-native@latest init frontend_assignment
 />
 ```
 
-그리하여 여러가지 라이브러리를 검색하여 그중에 가장 사용자가 많은 라이브러리인 react-native-snap-carousel를 선택 하였습니다.
+그리하여 여러가지 라이브러리를 검색하여 그중에 가장 사용자가 많은 라이브러리인 `react-native-snap-carousel`를 선택 하였습니다.
 
-npm install react-native-snap-carousel 명령어로 바로 설치를 진행하였는데 현재 프로젝트와 호완이 되지 않는것 인지
+`npm install react-native-snap-carousel` 명령어로 바로 설치를 진행하였는데 현재 프로젝트와 호완이 되지 않는것 인지
 
-VSCODE에서 react-native-snap-carousel를 찾지 못하고 import 되지 않았습니다.
+VSCODE에서 `react-native-snap-carousel`를 찾지 못하고 import 되지 않았습니다.
 
 해결법을 찾던 중 VS CDED에서 제시 하는 대로 @type 키워드를 넣어 다시 설치해 보았습니다.
 
@@ -75,7 +75,7 @@ https://facebook.github.io/watchman/docs/troubleshooting.html#recrawl
 To clear this warning, run:
 watchman watch-del '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native' ; watchman watch-project '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native'`
 
-이 메시지는 Watchman이 프로젝트 디렉토리의 변경을 정확하게 감지하지 못할때 발생하는 에러로 ChatGPT의 도움을 받아 아래의 순서대로 실행해 주었습니다.
+이 메시지는 `Watchman`이 프로젝트 디렉토리의 변경을 정확하게 감지하지 못할때 발생하는 에러로 `ChatGPT`의 도움을 받아 아래의 순서대로 실행해 주었습니다.
 
 1. Watchman 경로 재설정
 
@@ -86,7 +86,7 @@ watchman watch-del '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native'
 watchman watch-project '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native'
 ```
 
-- 이렇게 하면 Watchman이 해당 경로를 다시 감시하고 스캔할 수 있도록 설정됩니다.
+- 이렇게 하면 `Watchman`이 해당 경로를 다시 감시하고 스캔할 수 있도록 설정됩니다.
 
 2. Watchman을 다시 시작
 
@@ -97,7 +97,7 @@ watchman shutdown-server
 watchman watch-del-all
 ```
 
-이렇게 하면 Watchman이 모든 감시 중인 디렉토리를 중지하고 다시 시작합니다.
+이렇게 하면 `Watchman`이 모든 감시 중인 디렉토리를 중지하고 다시 시작합니다.
 
 위 작업으로 해당 에러가 해결 되었습니다.
 
