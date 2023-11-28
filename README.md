@@ -19,7 +19,7 @@ npx react-native@latest init frontend_assignment
 
 ## 이슈 2
 
-상단 Week을 선택하는 메뉴에서 react-native-swiper를 이용하려 하였으나 웹에서 지원되는 속성 예를 들면 ` "centeredSlides"`` 속성이  `react-native-swiper`에서는 존재하지 않았습니다.
+상단 Week을 선택하는 메뉴에서 react-native-swiper를 이용하려 하였으나 웹에서 지원되는 속성 예를 들면 `"centeredSlides"` 속성이 `react-native-swiper`에서는 존재하지 않았습니다.
 
 예) https://codesandbox.io/p/sandbox/6gw7p4?file=%2Fsrc%2FApp.jsx%3A17%2C7-26%2C8
 
