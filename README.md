@@ -50,9 +50,7 @@ npm i --save-dev @types/react-native-snap-carousel
 
 이번엔 다행이도 import가 되었으나 캐러샐 컴포넌트를 구성하는 중에 아래와 같은 에러가 발생 했습니다.
 
-```shell
-viewpropstypes will be removed from react native
-```
+`viewpropstypes will be removed from react native`
 
 검색을 한 결과 현재 최신 기준 react-native-snap-carousel 버전에서는 ViewPropTypes라는 모듈이 삭제되었는데, 현재 프로젝트에 설치된 버전에서 해당 모듈을 사용해서 생기는 이슈 같았습니다.
 
@@ -71,19 +69,17 @@ npm install react-native-snap-carousel@4.0.0-beta.6
 
 react-native-reanimated 을 사용하려고 컴포넌트에 적용중에 아래와 같은 버그가 나타났습니다.
 
-```shell
-Recrawled this watch 3 times, most recently because:
+`Recrawled this watch 3 times, most recently because:
 MustScanSubDirs UserDroppedTo resolve, please review the information on
 https://facebook.github.io/watchman/docs/troubleshooting.html#recrawl
 To clear this warning, run:
-watchman watch-del '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native' ; watchman watch-project '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native'
-```
+watchman watch-del '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native' ; watchman watch-project '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native'`
 
 이 메시지는 Watchman이 프로젝트 디렉토리의 변경을 정확하게 감지하지 못할때 발생하는 에러로 ChatGPT의 도움을 받아 아래의 순서대로 실행해 주었습니다.
 
 1. Watchman 경로 재설정
 
-터미널에서)
+`터미널에서)`
 
 ```shell
 watchman watch-del '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native'
@@ -94,7 +90,7 @@ watchman watch-project '/Users/nam-yeonhwa/Desktop/assign/getStart-react-native'
 
 2. Watchman을 다시 시작
 
-터미널에서)
+`터미널에서)`
 
 ```shell
 watchman shutdown-server
