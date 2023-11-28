@@ -8,7 +8,7 @@ npx react-native@latest init frontend-assignment
 
 위 명령어로 프로젝트 생성 중 아래와 같은 버그가 발생 하여 프로젝트 이름을 아래와 같이 변경 하였습니다.
 
-`Please use a valid identifier name (alphanumeric).
+`Please use a valid identifier name (alphanumeric).</br>
 Run CLI with --verbose flag for more details.`
 
 <프로젝트 명울 언더바로 변경>
