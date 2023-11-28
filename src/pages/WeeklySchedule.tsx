@@ -250,7 +250,7 @@ function WeeklySchedule() {
     },
   ]);
 
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState<number>(1);
   const weeklyTotal = Array.from(
     {
       length: [...new Set(weeklyList.map((v) => v.weekNumber))].length,
@@ -258,8 +258,8 @@ function WeeklySchedule() {
     (v, i) => i + 1
   );
   const [editMode, setEditMode] = useState<ACTIVE_MODE>(ACTIVE_MODE.EDIT);
-  const [slideDrection, setSlideDrection] = useState(1);
-  const [isToastVisible, setToastVisible] = useState(false);
+  const [slideDrection, setSlideDrection] = useState<number>(1);
+  const [isToastVisible, setToastVisible] = useState<boolean>(false);
   const [delItem, setDelItem] = useState<WeeklyItem>();
 
   /**
@@ -320,7 +320,6 @@ function WeeklySchedule() {
     setWeeklyList(updateDelItem);
 
     let del = weeklyList.find((v) => v.id === id);
-    console.log(del);
     setDelItem(del);
     showToast();
   };
@@ -359,6 +358,10 @@ function WeeklySchedule() {
     }
   };
 
+  /**
+   * @function onToastClose
+   * @description 토스트 팝업 닫기
+   */
   const onToastClose = () => {
     setToastVisible(false);
   };
@@ -367,12 +370,15 @@ function WeeklySchedule() {
     <>
       <SafeAreaProvider>
         <SafeAreaView style={styles.container} edges={["bottom"]}>
+          {/* 토스트 팝업 : start */}
           <Toast
             message="Checklist deleted"
             isVisible={isToastVisible}
             onUndo={onUndo}
             onClose={onToastClose}
           />
+          {/* 토스트 팝업 : end */}
+          {/* WeeklySchedule : start */}
           <KeyboardAvoidingView
             behavior={Platform.select({ ios: "padding" })}
             style={styles.avoid}
@@ -394,6 +400,7 @@ function WeeklySchedule() {
             )}
             <InputBox onInsert={onInsert} />
           </KeyboardAvoidingView>
+          {/* WeeklySchedule : end */}
         </SafeAreaView>
       </SafeAreaProvider>
     </>

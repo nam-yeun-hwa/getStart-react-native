@@ -9,20 +9,30 @@ function WarningNoPost() {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../../assets/images/img_no_post.png")}
-        style={{ width: screenWidth / 1.4, height: screenWidth / 1.1 }}
-        resizeMode={"contain"}
-      />
+      <View style={styles.innerContainer}>
+        <Image
+          source={require("../../assets/images/img_no_post.png")}
+          style={{ width: screenWidth / 1.4, height: screenWidth / 1.1 }}
+          resizeMode={"contain"}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    width: "100%",
+  },
+
+  innerContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 25,
   },
   image: {
     width: 190,

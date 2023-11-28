@@ -9,6 +9,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import WarningNoPost from "../warningSign/WarningNoPost";
 
 interface UserWeeklyData {
   id: number;
@@ -27,7 +28,7 @@ interface PropsUserWeeklyData {
 
 /**
  * WeekContent 컴포넌트
- * @description 주관련 전체 리스트 컨텐츠
+ * @description 주관련 전체 리스트 컨텐츠, ProgressBar와 FlatList컴포넌트로 구성
  */
 function WeekContent({
   data,
@@ -75,17 +76,23 @@ function WeekContent({
 
   return (
     <Animated.View style={[styles.container, animatedStyle]}>
-      <ProgressBar
-        totalStep={data.length}
-        nowStep={data.filter((v) => v.done).length}
-      />
+      <View style={styles.innerContainer}>
+        {data.length > 0 ? (
+          <ProgressBar
+            totalStep={data.length}
+            nowStep={data.filter((v) => v.done).length}
+          />
+        ) : (
+          <WarningNoPost />
+        )}
 
-      <FlatList
-        style={styles.container}
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
+        <FlatList
+          style={styles.container}
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      </View>
     </Animated.View>
   );
 }
@@ -94,10 +101,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  innerContainer: {
+    flex: 1,
+  },
 
   item: {
     flexWrap: "wrap",
     flexDirection: "row",
+    flex: 1,
+
     marginBottom: 10,
     marginHorizontal: 20,
   },

@@ -13,7 +13,7 @@ interface CarouselItem {
  * @description 캐러셀 메뉴 아이템 리스트를 관리하는 컨테이너
  */
 function CarouselMenu({ data, onSelectWeek }: CarouselItem) {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState<number>(1);
   const carouselRef = useRef<any>(null);
 
   const width = Dimensions.get("window").width;

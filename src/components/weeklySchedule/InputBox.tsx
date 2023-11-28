@@ -61,6 +61,7 @@ function InputBox({ onInsert }: InputBoxProps) {
         active={!activeInputStyle}
         onToggle={onDimToggle}
       />
+      {/* 사용자 입력 TextInput : start */}
       <View style={[styles.container, { opacity: activeInputStyle ? 0 : 1 }]}>
         <View style={[styles.inputContainer]}>
           <TextInput
@@ -86,6 +87,8 @@ function InputBox({ onInsert }: InputBoxProps) {
           </View>
         </View>
       </View>
+      {/* 사용자 입력 TextInput : end */}
+
       <View style={styles.btnContainer}>
         {activeInputStyle &&
           Platform.select({

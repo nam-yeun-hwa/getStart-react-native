@@ -19,6 +19,9 @@ const Toast = ({ message, isVisible, onUndo, onClose }: ToastProp) => {
   const opacity = useSharedValue(1);
   const positionY = useSharedValue(60);
 
+  /**
+   *@description isVisible 상태에 따라 애니메이션 값 업데이트
+   */
   useEffect(() => {
     if (isVisible) {
       opacity.value = withTiming(1, { duration: 300 });

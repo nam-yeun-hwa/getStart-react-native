@@ -17,7 +17,10 @@ interface HeaderProps {
 
 function Header({ editMode, onModeToggle }: HeaderProps) {
   const { top } = useSafeAreaInsets();
-
+  /**
+   * @function onActiveMode
+   * @description 헤더 우측 EDIT와 DONE 현제 상태 체크
+   */
   const onActiveMode = () => {
     let active =
       editMode === ACTIVE_MODE.EDIT ? ACTIVE_MODE.DONE : ACTIVE_MODE.EDIT;
