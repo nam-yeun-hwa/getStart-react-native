@@ -8,6 +8,14 @@ import WarningNoPost from "../components/warningSign/WarningNoPost";
 import WeekContent from "../components/weeklySchedule/WeekContent";
 import InputBox from "../components/weeklySchedule/InputBox";
 import { ACTIVE_MODE } from "../constants/constant";
+import Toast from "../components/warningSign/Toast";
+
+interface WeeklyItem {
+  id: number;
+  weekNumber: number;
+  content: string;
+  done: boolean;
+}
 
 function WeeklySchedule() {
   const [weeklyList, setWeeklyList] = useState([
@@ -243,12 +251,19 @@ function WeeklySchedule() {
   ]);
 
   const [currentIndex, setCurrentIndex] = useState(1);
-  const weeklyTotal = [...new Set(weeklyList.map((v) => v.weekNumber))];
+  const weeklyTotal = Array.from(
+    {
+      length: [...new Set(weeklyList.map((v) => v.weekNumber))].length,
+    },
+    (v, i) => i + 1
+  );
   const [editMode, setEditMode] = useState<ACTIVE_MODE>(ACTIVE_MODE.EDIT);
   const [slideDrection, setSlideDrection] = useState(1);
+  const [isToastVisible, setToastVisible] = useState(false);
+  const [delItem, setDelItem] = useState<WeeklyItem>();
 
   /**
-   * @description 페이지가 언마운트 될때 Active 였던 인덱스를 저장
+   * @description Active 였던 인덱스를 저장
    */
   useEffect(() => {
     return () => {
@@ -303,6 +318,11 @@ function WeeklySchedule() {
   const onRemove = (id: number) => {
     const updateDelItem = weeklyList.filter((v) => v.id !== id);
     setWeeklyList(updateDelItem);
+
+    let del = weeklyList.find((v) => v.id === id);
+    console.log(del);
+    setDelItem(del);
+    showToast();
   };
 
   /**
@@ -312,10 +332,42 @@ function WeeklySchedule() {
   const onModeToggle = (activeMode: ACTIVE_MODE) => {
     setEditMode(activeMode);
   };
+
+  /**
+   * @function showToast
+   * @description 토스트 오픈
+   */
+  const showToast = () => {
+    setToastVisible(true);
+  };
+
+  /**
+   * @function onUndo
+   * @description 삭제 되돌리기
+   */
+  const onUndo = () => {
+    setToastVisible(false);
+
+    if (delItem) {
+      const weekItem = {
+        id: delItem.id,
+        weekNumber: delItem.weekNumber,
+        content: delItem.content,
+        done: delItem.done,
+      };
+      setWeeklyList(weeklyList.concat(weekItem));
+    }
+  };
+
   return (
     <>
       <SafeAreaProvider>
         <SafeAreaView style={styles.container} edges={["bottom"]}>
+          <Toast
+            message="Checklist deleted"
+            isVisible={isToastVisible}
+            onUndo={onUndo}
+          />
           <KeyboardAvoidingView
             behavior={Platform.select({ ios: "padding" })}
             style={styles.avoid}
@@ -328,7 +380,7 @@ function WeeklySchedule() {
               <WeekContent
                 data={weeklyList
                   .filter((v) => v.weekNumber === currentIndex)
-                  .reverse()}
+                  .sort((a, b) => b.id - a.id)}
                 slideDirection={currentIndex - slideDrection}
                 mode={editMode}
                 onDone={onDone}
