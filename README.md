@@ -23,8 +23,7 @@ React Native에서는 공식적으로 Animated API를 제공해주고 있지만
 Animated API thread에서 비동기적으로 UI thread와 통신을 하며 이 때 JS thread가 할일이 많아지게 되면 **프레임 드롭이 생기는 문제가 발생**하게 되는 문제를 해결하기 위해 등장한 라이브러리 이며
 애니메이션 및 상호 작용의 무거운 작업들을 모두 UI thread에서 작업한다.
     
-shareValue의 변경을 감지하며 </br>
-useSharedValue, useAnimatedStyle, withSpring, withTiming 등의 함수들을 사용하여 애니메이션 값을 정의하고, 이를 컴포넌트 스타일에 적용한다.
+shareValue의 변경을 감지하며 useSharedValue, useAnimatedStyle, withSpring, withTiming 등의 함수들을 사용하여 애니메이션 값을 정의하고, 이를 컴포넌트 스타일에 적용한다.
 
 react-native-reanimated은 네이티브 스레드에서 애니메이션을 처리하므로, 성능이 향상된다. 기본적인 Animated API보다 훨씬 더 부드러운 애니메이션을 제공한다.
     
@@ -76,7 +75,7 @@ react-native-reanimated에서 제공하는 애니메이션 관련 컴포넌트�
 ```
 
 </br>
-위의 예시에서 useSharedValue로 애니메이션 값을 정의하고, useAnimatedStyle로 애니메이션 스타일을 정의하며 withSpring과 같은 함수를 사용하여 애니메이션의 종류와 속도 등을 설정할 수 있다.
+
 사용법과 기능은 React Native Animated API와 유사하지만, 성능 및 기능 면에서 뛰어난 특징을 제공한다.
     
 
