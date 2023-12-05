@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import ProgressBar from "./ProgressBar";
-import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
-import ListItem from "./ListItem";
-import { ACTIVE_MODE } from "../../constants/constant";
+import { useEffect, useState } from 'react';
+import ProgressBar from './ProgressBar';
+import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native';
+import ListItem from './ListItem';
+import { ACTIVE_MODE } from '../../constants/constant';
 import Animated, {
   Easing,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from "react-native-reanimated";
-import WarningNoPost from "../warningSign/WarningNoPost";
+} from 'react-native-reanimated';
+import WarningNoPost from '../warningSign/WarningNoPost';
 
 interface UserWeeklyData {
   id: number;
@@ -30,13 +30,7 @@ interface PropsUserWeeklyData {
  * WeekContent 컴포넌트
  * @description 주관련 전체 리스트 컨텐츠, ProgressBar와 FlatList컴포넌트로 구성
  */
-function WeekContent({
-  data,
-  mode,
-  slideDirection,
-  onDone,
-  onRemove,
-}: PropsUserWeeklyData) {
+function WeekContent({ data, mode, slideDirection, onDone, onRemove }: PropsUserWeeklyData) {
   /**
    * @description 애니메이션 초기 값 설정
    */
@@ -52,7 +46,7 @@ function WeekContent({
    * @@description Xposition 애니메이션
    */
   useEffect(() => {
-    translateX.value = withTiming(0, { duration: 600, easing: Easing.ease }); // 애니메이션 등장
+    translateX.value = withTiming(0, { duration: 600, easing: Easing.ease });
   }, [data]);
 
   /**
@@ -69,19 +63,14 @@ function WeekContent({
   }, [slideDirection]);
 
   const renderItem = ({ item }: { item: UserWeeklyData }) => {
-    return (
-      <ListItem item={item} mode={mode} onDone={onDone} onRemove={onRemove} />
-    );
+    return <ListItem item={item} mode={mode} onDone={onDone} onRemove={onRemove} />;
   };
 
   return (
     <Animated.View style={[styles.container, animatedStyle]}>
       <View style={styles.innerContainer}>
         {data.length > 0 ? (
-          <ProgressBar
-            totalStep={data.length}
-            nowStep={data.filter((v) => v.done).length}
-          />
+          <ProgressBar totalStep={data.length} nowStep={data.filter((v) => v.done).length} />
         ) : (
           <WarningNoPost />
         )}
@@ -106,8 +95,8 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    flexWrap: "wrap",
-    flexDirection: "row",
+    flexWrap: 'wrap',
+    flexDirection: 'row',
     flex: 1,
 
     marginBottom: 10,
@@ -128,9 +117,9 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 50,
-    backgroundColor: "#44CEC6",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#44CEC6',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 5,
     marginRight: 12,
   },
@@ -139,14 +128,14 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 50,
-    backgroundColor: "#FF5146",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#FF5146',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginLeft: 8,
   },
 
   txt: {
-    width: "89.2%",
+    width: '89.2%',
     fontSize: 14,
     lineHeight: 21,
     marginVertical: 5,

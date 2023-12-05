@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
-} from "react-native";
+} from 'react-native';
 
 interface DimActive {
   active: boolean;
@@ -33,7 +33,7 @@ const DimBehindKeyboardExample = ({ active, onToggle }: DimActive) => {
           <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.container}>
               <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.dimBehindKeyboard}
               ></KeyboardAvoidingView>
             </View>
@@ -46,17 +46,17 @@ const DimBehindKeyboardExample = ({ active, onToggle }: DimActive) => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     top: 0,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   dimBehindKeyboard: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

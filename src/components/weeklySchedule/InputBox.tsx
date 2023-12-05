@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from 'react';
 import {
   Image,
   Keyboard,
@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
-} from "react-native";
+} from 'react-native';
 
-import DimBehindKeyboardExample from "./Dim";
+import DimBehindKeyboardExample from './Dim';
 
 interface InputBoxProps {
   onInsert: (text: string) => void;
@@ -23,44 +23,11 @@ interface InputBoxProps {
 function InputBox({ onInsert }: InputBoxProps) {
   const TextInputRef = useRef<TextInput | null>(null);
   const [activeInputStyle, setActiveInput] = useState(true);
-  const [text, setText] = useState("");
-
-  /**
-   * @function onPressAddItem
-   * @description 키보드 입력시 리스트에 추가 및 키보드 빈 스트링으로 초기화
-   */
-  const onPressAddItem = () => {
-    if (text.length > 0) {
-      onInsert(text);
-      setText("");
-    }
-    Keyboard.dismiss();
-    setActiveInput(true);
-  };
-
-  /**
-   * @function onPressShowInputText
-   * @description 키보드에 포커스주기 & 키보드 active상태로 변경
-   */
-  const onPressShowInputText = () => {
-    TextInputRef.current?.focus();
-    setActiveInput(false);
-  };
-
-  /**
-   * @function onToggle
-   * @description Dim 영역 클릭시 키보드 닫히기
-   */
-  const onDimToggle = () => {
-    setActiveInput(true);
-  };
+  const [text, setText] = useState('');
 
   return (
     <>
-      <DimBehindKeyboardExample
-        active={!activeInputStyle}
-        onToggle={onDimToggle}
-      />
+      <DimBehindKeyboardExample active={!activeInputStyle} onToggle={() => setActiveInput(true)} />
       {/* 사용자 입력 TextInput : start */}
       <View style={[styles.container, { opacity: activeInputStyle ? 0 : 1 }]}>
         <View style={[styles.inputContainer]}>
@@ -74,10 +41,19 @@ function InputBox({ onInsert }: InputBoxProps) {
           <View style={styles.addContainer}>
             {Platform.select({
               ios: (
-                <TouchableWithoutFeedback onPress={onPressAddItem}>
+                <TouchableWithoutFeedback
+                  onPress={() => {
+                    if (text.length > 0) {
+                      onInsert(text);
+                      setText('');
+                    }
+                    Keyboard.dismiss();
+                    setActiveInput(true);
+                  }}
+                >
                   <View style={styles.writeBtn}>
                     <Image
-                      source={require("../../assets/icon/ico_arrow_up.png")}
+                      source={require('../../assets/icon/ico_arrow_up.png')}
                       style={styles.arrow}
                     ></Image>
                   </View>
@@ -94,12 +70,15 @@ function InputBox({ onInsert }: InputBoxProps) {
           Platform.select({
             ios: (
               <TouchableOpacity
-                onPress={onPressShowInputText}
+                onPress={() => {
+                  TextInputRef.current?.focus();
+                  setActiveInput(false);
+                }}
                 activeOpacity={0.5}
               >
                 <View style={styles.showBtn}>
                   <Image
-                    source={require("../../assets/icon/ico_add_weekly_item.png")}
+                    source={require('../../assets/icon/ico_add_weekly_item.png')}
                     resizeMode="contain"
                   ></Image>
                 </View>
@@ -114,17 +93,17 @@ function InputBox({ onInsert }: InputBoxProps) {
 const styles = StyleSheet.create({
   container: {
     height: 66,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    flexDirection: "row",
-    backgroundColor: "white",
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'white',
   },
 
   inputContainer: {
-    borderTopColor: "#F6F5F8",
+    borderTopColor: '#F6F5F8',
     borderTopWidth: 1,
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: 'center',
+    flexDirection: 'row',
     paddingHorizontal: 20,
     paddingVertical: 12,
   },
@@ -135,24 +114,24 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderLeftWidth: 1,
-    borderColor: "#EAE9ED",
-    backgroundColor: "#FAFAFA",
+    borderColor: '#EAE9ED',
+    backgroundColor: '#FAFAFA',
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 8,
     fontSize: 14,
     lineHeight: 18,
-    fontWeight: "400",
+    fontWeight: '400',
     paddingHorizontal: 16,
   },
 
   addContainer: {
     height: 42,
-    justifyContent: "center",
+    justifyContent: 'center',
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderRightWidth: 1,
-    borderColor: "#EAE9ED",
-    backgroundColor: "#FAFAFA",
+    borderColor: '#EAE9ED',
+    backgroundColor: '#FAFAFA',
     paddingVertical: 12,
     borderTopRightRadius: 9,
     borderBottomEndRadius: 8,
@@ -162,9 +141,9 @@ const styles = StyleSheet.create({
   writeBtn: {
     width: 32,
     height: 32,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#44CEC6",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#44CEC6',
     borderRadius: 12.4,
   },
 
@@ -174,23 +153,23 @@ const styles = StyleSheet.create({
   },
 
   btnContainer: {
-    position: "absolute",
+    position: 'absolute',
     right: 0,
     bottom: 0,
-    width: "100%",
-    justifyContent: "flex-end",
+    width: '100%',
+    justifyContent: 'flex-end',
   },
 
   showBtn: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     right: 0,
     height: 52,
     width: 52,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 50,
-    backgroundColor: "#44CEC6",
+    backgroundColor: '#44CEC6',
     marginBottom: 20,
     marginRight: 20,
   },

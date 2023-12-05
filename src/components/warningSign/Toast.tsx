@@ -1,12 +1,11 @@
-import { useEffect } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useEffect } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, {
-  Easing,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   withTiming,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
 interface ToastProp {
   message: string;
@@ -32,10 +31,10 @@ const Toast = ({ message, isVisible, onUndo, onClose }: ToastProp) => {
           duration: 1500,
         });
         onClose();
-      }, 2000); // 2초 후에 토스트를 닫음
+      }, 5000); // 2초 후에 토스트를 닫음
     } else {
       positionY.value = withSpring(60, {
-        duration: 1500,
+        duration: 5000,
       });
     }
   }, [isVisible, opacity]);
@@ -53,10 +52,7 @@ const Toast = ({ message, isVisible, onUndo, onClose }: ToastProp) => {
         <Text style={styles.toastText}>{message}</Text>
         <TouchableOpacity onPress={onUndo}>
           <View style={styles.button}>
-            <Image
-              source={require("../../assets/icon/ico-toast-undo.png")}
-              style={styles.icon}
-            />
+            <Image source={require('../../assets/icon/ico-toast-undo.png')} style={styles.icon} />
             <Text style={styles.btnTxt}>Undo</Text>
           </View>
         </TouchableOpacity>
@@ -67,25 +63,25 @@ const Toast = ({ message, isVisible, onUndo, onClose }: ToastProp) => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
+    position: 'absolute',
     left: 0,
     bottom: 0,
-    width: "100%",
+    width: '100%',
     height: 46,
     paddingHorizontal: 20,
     zIndex: 1,
   },
   innlerCotainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
     borderRadius: 8,
     paddingVertical: 13,
     paddingHorizontal: 20,
   },
   toastText: {
-    color: "white",
+    color: 'white',
     fontSize: 13.5,
     lineHeight: 18,
   },
@@ -96,15 +92,15 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 
   btnTxt: {
     fontSize: 13.5,
     lineHeight: 17,
-    color: "#44CEC6",
+    color: '#44CEC6',
     marginLeft: 4,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 });
 
