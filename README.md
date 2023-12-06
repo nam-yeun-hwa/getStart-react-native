@@ -82,6 +82,8 @@ react-native-reanimated에서 제공하는 애니메이션 관련 컴포넌트�
 ## setTimeOut을 Async / Await으로 구현하기
 
  **Toast 컴포넌트에서 setTimeout()으로 5초뒤 Toast 컴포넌트의 positionY값을 변경하여 애니메이션 해준 것과 관련**
+
+### setTimeOut
 ```shell
 function testSetTimeout(callback) {
   console.log("1. Before callback");
