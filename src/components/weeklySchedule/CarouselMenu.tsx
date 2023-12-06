@@ -5,14 +5,14 @@ import { Dimensions } from 'react-native';
 import CarouselItem, { CarouselWeekItem } from './CarouselItem';
 
 interface CarouselItem {
-  data: Array<number>;
+  weeklyTotal: number;
   onSelectWeek: (select: number) => void;
 }
 /**
  * CarouselMenu 컴포넌트
  * @description 캐러셀 메뉴 아이템 리스트를 관리하는 컨테이너
  */
-function CarouselMenu({ data, onSelectWeek }: CarouselItem) {
+function CarouselMenu({ weeklyTotal, onSelectWeek }: CarouselItem) {
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const carouselRef = useRef<any>(null);
 
@@ -58,7 +58,7 @@ function CarouselMenu({ data, onSelectWeek }: CarouselItem) {
     <View style={styles.contianer}>
       <Carousel
         ref={carouselRef}
-        data={data}
+        data={Array.from({ length: weeklyTotal }, (i, v) => v + 1)}
         renderItem={renderItem}
         sliderWidth={width} // 캐러셀의 전체 너비
         itemWidth={width / 5.5} // 각 슬라이드의 너비

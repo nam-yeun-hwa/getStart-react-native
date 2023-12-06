@@ -34,7 +34,7 @@ const Toast = ({ message, isVisible, onUndo, onClose }: ToastProp) => {
       }, 5000); // 2초 후에 토스트를 닫음
     } else {
       positionY.value = withSpring(60, {
-        duration: 5000,
+        duration: 1500,
       });
     }
   }, [isVisible, opacity]);
