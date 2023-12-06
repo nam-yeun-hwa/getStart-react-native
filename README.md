@@ -132,69 +132,7 @@ react-native-reanimated에서 제공하는 애니메이션 관련 컴포넌트�
 사용법과 기능은 React Native Animated API와 유사하지만, 성능 및 기능 면에서 뛰어난 특징을 제공한다.
 
 
-## [참고] setTimeOut을 Async / Await으로 구현하기
- Toast 컴포넌트에서 setTimeout()으로 5초뒤 Toast 컴포넌트의 positionY값을 변경하여 애니메이션 해준 것과 관련
 
-### setTimeOut
-```shell
-function testSetTimeout(callback) {
-  console.log("1. Before callback");
-  setTimeout(function () {
-    console.log("2. callback function");
-    if (typeof callback === "function") {
-      callback();
-    } else {
-      console.log("   Callback is not func!");
-    }
-  }, 3000);
-  console.log("3. After callback");
-}
-
-(function runA() {
-  testSetTimeout(function () {
-    console.log("   Call about setTimeout callback func!!");
-  });
-})();
-
-//1. Before callback
-//3. After callback
-//2. callback function
-//Call about setTimeout callback func!!
-```
-### Async / Await
-```shell
-function testPromise(callback) {
-  return new Promise((resolve, reject) => {
-    if (typeof callback === "function") {
-      console.log("1. callback is function.");
-      setTimeout(() => {
-        resolve(callback);
-      }, 2000);
-    } else if (typeof callback === "number") {
-      console.log("1. callback number is " + callback);
-      setTimeout(() => {
-        resolve(callback);
-      }, 2000);
-    } else {
-      reject("1. callback is not a function, number");
-    }
-  });
-}
-
-async function testAsync(x) {
-  var a = testPromise(20)
-  var b = testPromise(30)
-
-  return x + await a + await b
-}
-
-testAsync(50).then(result => console.log(result))
-
-//1. callback number is 20
-//2. callback number is 30
-//100
-```
-promise와 async는 명확히 앞서 하던 일들이 끝나면 다음 일을 할 수 있도록 명시해준다.
 
 
     
