@@ -18,19 +18,16 @@ interface DimActive {
  * @description 키보드 오픈시 DIm 영역
  */
 const DimBehindKeyboardExample = ({ active, onToggle }: DimActive) => {
-  /**
-   * @function onPress
-   * @description 딤영역을 클릭하면 키보드가 닫기
-   */
-  const onPress = () => {
-    Keyboard.dismiss();
-    onToggle();
-  };
   return (
     <>
       {active && (
         <>
-          <TouchableWithoutFeedback onPress={onPress}>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              Keyboard.dismiss();
+              onToggle();
+            }}
+          >
             <View style={styles.container}>
               <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
