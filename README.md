@@ -14,6 +14,53 @@ npm install react-native-snap-carousel@4.0.0-beta.6
 </br>
 
 
+
+
+## 캐러셀 주요 속성
+
+```shell
+ <View style={styles.contianer}>
+      <Carousel
+        ref={carouselRef}
+        data={Array.from({ length: weeklyTotal }, (i, v) => v + 1)}
+        renderItem={renderItem}
+        sliderWidth={width} // 캐러셀의 전체 너비
+        itemWidth={width / 5.5} // 각 슬라이드의 너비
+        layout="default" // 레이아웃 모드 ("default", "stack", "tinder")
+        loop={false} // 무한 루프 활성화
+        inactiveSlideScale={1}
+        onScrollIndexChanged={handleSnapToItem}
+      />
+    </View>
+```
+</br>
+</br>
+
+**itemWidth** </br>
+캐러셀의 전체 넓이를 주고 itemWidth값의 넓이를 주어 화면에 보이는 캐러셀 아이템의 수를 조정할수 있고 padding이나 margin값으로 각 아이템당 간격을 조정 하였다.
+
+**onScrollIndexChanged** </br>
+캐러셀이 스크롤 될때마다 인덱스가 변경을 감지할수 있다. 
+```shell
+const handleSnapToItem = (index: number) => {
+  //index가 들어온다.
+};
+```
+
+
+**renderItem**
+
+```shell
+const carouselRef = useRef<any>(null);
+```
+를 캐러셀에 연결 시켜 주면 캐러셀 아이템에 인덱스 값을 변경하여 focus를 줄수 있다.
+```shell
+carouselRef.current?.snapToItem(Number(index) - 1);
+```
+
+</br>
+</br>
+
 ## 2. react-native-reanimated
 
 
