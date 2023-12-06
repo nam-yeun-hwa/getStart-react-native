@@ -130,6 +130,46 @@ react-native-reanimated에서 제공하는 애니메이션 관련 컴포넌트�
 </br>
 
 사용법과 기능은 React Native Animated API와 유사하지만, 성능 및 기능 면에서 뛰어난 특징을 제공한다.
+## 애니메이션이 완료된 후에 실행되는 콜백 함수를 사용
+isFinished가 true값이 들어온다.
+```shell
+ const startAnimation = () => {
+    translateX.value = withTiming(100, { duration: 1000, easing: Easing.linear }, (isFinished) => {
+      if (isFinished) {
+        // 애니메이션이 완료된 후에 실행되는 콜백 함수
+      }
+    });
+  };
+```
+
+
+## withSequence 함수를 사용하면 여러 애니메이션 단계를 순차적으로 실행하는 방법
+
+```shell
+const animatedStyle = useAnimatedStyle(() => {
+  return {
+    transform: [
+      {
+        translateX: withSequence(
+          withTiming(
+            slideDirection >= 0 ? -800 : 800,
+            {
+              duration: 600,
+              easing: Easing.ease,
+            },
+          ),
+          withTiming(
+            0, // 0으로 되돌아가는 애니메이션
+            {
+              duration: 0, // 0으로 되돌아가는 애니메이션의 속도를 0으로 설정
+            },
+          ),
+        ),
+      },
+    ],
+  };
+});
+```
 
 
 
