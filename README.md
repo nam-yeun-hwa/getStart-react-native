@@ -1,3 +1,9 @@
+# 테스트 화면
+
+
+<video src="https://private-user-images.githubusercontent.com/138950568/288395576-b922a32b-da44-43ce-83b7-4b9d047a4633.mov?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDE4Njc3OTYsIm5iZiI6MTcwMTg2NzQ5NiwicGF0aCI6Ii8xMzg5NTA1NjgvMjg4Mzk1NTc2LWI5MjJhMzJiLWRhNDQtNDNjZS04M2I3LTRiOWQwNDdhNDYzMy5tb3Y_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBSVdOSllBWDRDU1ZFSDUzQSUyRjIwMjMxMjA2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDIzMTIwNlQxMjU4MTZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT02N2JhOGUzYTE5NTY3MGM0NjQxYjM3MmMzZDQ1N2NiODg3MjNhYzRhMGYwOThkNjU1NzBiNTg5OWU3ODRjMmJmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.m-aTirJCsRkR6AZXgfaVDSAtv-1_pJy9FywXbGL75wA"> <video/>
+
+
 # 사용한 라이브러리 
 ## 1. react-native-snap-carousel </br>
    설치 후 사용 중 `viewpropstypes will be removed from react native` 버그가 발생 하였다.</br>
@@ -13,6 +19,53 @@ npm install react-native-snap-carousel@4.0.0-beta.6
 </br>
 </br>
 
+
+
+
+## 캐러셀 주요 속성
+
+```shell
+ <View style={styles.contianer}>
+      <Carousel
+        ref={carouselRef}
+        data={Array.from({ length: weeklyTotal }, (i, v) => v + 1)}
+        renderItem={renderItem}
+        sliderWidth={width} // 캐러셀의 전체 너비
+        itemWidth={width / 5.5} // 각 슬라이드의 너비
+        layout="default" // 레이아웃 모드 ("default", "stack", "tinder")
+        loop={false} // 무한 루프 활성화
+        inactiveSlideScale={1}
+        onScrollIndexChanged={handleSnapToItem}
+      />
+    </View>
+```
+</br>
+</br>
+
+**itemWidth** </br>
+캐러셀의 전체 넓이를 주고 itemWidth값의 넓이를 주어 화면에 보이는 캐러셀 아이템의 수를 조정할수 있고 padding이나 margin값으로 각 아이템당 간격을 조정 하였다.
+
+**onScrollIndexChanged** </br>
+캐러셀이 스크롤 될때마다 인덱스가 변경을 감지할수 있다. 
+```shell
+const handleSnapToItem = (index: number) => {
+  //index가 들어온다.
+};
+```
+
+
+**renderItem**
+
+```shell
+const carouselRef = useRef<any>(null);
+```
+를 캐러셀에 연결 시켜 주면 캐러셀 아이템에 인덱스 값을 변경하여 focus를 줄수 있다.
+```shell
+carouselRef.current?.snapToItem(Number(index) - 1);
+```
+
+</br>
+</br>
 
 ## 2. react-native-reanimated
 
@@ -77,70 +130,49 @@ react-native-reanimated에서 제공하는 애니메이션 관련 컴포넌트�
 </br>
 
 사용법과 기능은 React Native Animated API와 유사하지만, 성능 및 기능 면에서 뛰어난 특징을 제공한다.
-
-
-## setTimeOut을 Async / Await으로 구현하기
-
- **Toast 컴포넌트에서 setTimeout()으로 5초뒤 Toast 컴포넌트의 positionY값을 변경하여 애니메이션 해준 것과 관련**
+## 애니메이션이 완료된 후에 실행되는 콜백 함수를 사용
+isFinished가 true값이 들어온다.
 ```shell
-function testSetTimeout(callback) {
-  console.log("1. Before callback");
-  setTimeout(function () {
-    console.log("2. callback function");
-    if (typeof callback === "function") {
-      callback();
-    } else {
-      console.log("   Callback is not func!");
-    }
-  }, 3000);
-  console.log("3. After callback");
-}
-
-(function runA() {
-  testSetTimeout(function () {
-    console.log("   Call about setTimeout callback func!!");
-  });
-})();
-
-//1. Before callback
-//3. After callback
-//2. callback function
-//Call about setTimeout callback func!!
+ const startAnimation = () => {
+    translateX.value = withTiming(100, { duration: 1000, easing: Easing.linear }, (isFinished) => {
+      if (isFinished) {
+        // 애니메이션이 완료된 후에 실행되는 콜백 함수
+      }
+    });
+  };
 ```
-### Async / Await
+
+
+## withSequence 함수를 사용하면 여러 애니메이션 단계를 순차적으로 실행하는 방법
+
 ```shell
-function testPromise(callback) {
-  return new Promise((resolve, reject) => {
-    if (typeof callback === "function") {
-      console.log("1. callback is function.");
-      setTimeout(() => {
-        resolve(callback);
-      }, 2000);
-    } else if (typeof callback === "number") {
-      console.log("1. callback number is " + callback);
-      setTimeout(() => {
-        resolve(callback);
-      }, 2000);
-    } else {
-      reject("1. callback is not a function, number");
-    }
-  });
-}
-
-async function testAsync(x) {
-  var a = testPromise(20)
-  var b = testPromise(30)
-
-  return x + await a + await b
-}
-
-testAsync(50).then(result => console.log(result))
-
-//1. callback number is 20
-//2. callback number is 30
-//100
+const animatedStyle = useAnimatedStyle(() => {
+  return {
+    transform: [
+      {
+        translateX: withSequence(
+          withTiming(
+            slideDirection >= 0 ? -800 : 800,
+            {
+              duration: 600,
+              easing: Easing.ease,
+            },
+          ),
+          withTiming(
+            0, // 0으로 되돌아가는 애니메이션
+            {
+              duration: 0, // 0으로 되돌아가는 애니메이션의 속도를 0으로 설정
+            },
+          ),
+        ),
+      },
+    ],
+  };
+});
 ```
-promise와 async는 명확히 앞서 하던 일들이 끝나면 다음 일을 할 수 있도록 명시해준다.
+
+
+
 
 
     
