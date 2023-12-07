@@ -8,6 +8,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  withSequence,
 } from 'react-native-reanimated';
 import WarningNoPost from '../warningSign/WarningNoPost';
 
@@ -34,33 +35,24 @@ function WeekContent({ data, mode, slideDirection, onDone, onRemove }: PropsUser
   /**
    * @description 애니메이션 초기 값 설정
    */
-  const translateX = useSharedValue(-800);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: translateX.value }],
+      transform: [
+        {
+          translateX: withSequence(
+            withTiming(slideDirection >= 0 ? -800 : 800, {
+              duration: 0,
+            }),
+            withTiming(0, {
+              duration: 600,
+              easing: Easing.ease,
+            }),
+          ),
+        },
+      ],
     };
   });
-
-  /**
-   * @@description Xposition 애니메이션
-   */
-  useEffect(() => {
-    translateX.value = withTiming(0, { duration: 600, easing: Easing.ease });
-  }, [data]);
-
-  /**
-   * @@description 리스트 Xposition 초기값 설정
-   */
-  useEffect(() => {
-    return () => {
-      if (slideDirection > 0) {
-        translateX.value = 800;
-      } else {
-        translateX.value = -800;
-      }
-    };
-  }, [slideDirection]);
 
   const renderItem = ({ item }: { item: UserWeeklyData }) => {
     return <ListItem item={item} mode={mode} onDone={onDone} onRemove={onRemove} />;

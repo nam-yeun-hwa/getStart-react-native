@@ -14,7 +14,7 @@ function CarouselItem({ active, weekNumber, onClickIndex }: CarouselWeekItem) {
   return (
     <TouchableNativeFeedback onPress={() => onClickIndex(weekNumber)}>
       <View style={[styles.container, active && styles.activeState]}>
-        <Text style={[styles.smallText, active && styles.activeFontColor]}>week</Text>
+        <Text style={[styles.smallText, active && styles.activeFontColor]}>day</Text>
         <Text style={[styles.emphasisText, active && styles.activeFontColor]}>{weekNumber}</Text>
       </View>
     </TouchableNativeFeedback>

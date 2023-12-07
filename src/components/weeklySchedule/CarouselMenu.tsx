@@ -44,6 +44,7 @@ function CarouselMenu({ weeklyTotal, onSelectWeek }: CarouselItem) {
    */
   const renderItem = ({ item }: { item: any }) => {
     const activeItemStyle = item === activeIndex || false;
+    // console.log(carouselRef.current.);
 
     return (
       <CarouselItem
