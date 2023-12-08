@@ -21,7 +21,7 @@ function CarouselMenu({ weeklyTotal, onSelectWeek }: CarouselItemProps) {
   /**
    * @fuction handleSnapToItem
    * @param index
-   * @description 캐러셀이 스크롤 될때 마다 인덱스값을 받아 화면 css를 업데이트
+   * @description 캐러셀이 스크롤 될때 마다 인덱스값을 받아 화면 css를 업데이트, 현재 선택된 주차를 업데이트하여 부모 컴포넌트에서 선택된 주차에 대한 내용을 입력 받는다.
    */
   const handleSnapToItem = useCallback((index: number) => {
     onSelectWeek(index + 1);
@@ -44,7 +44,7 @@ function CarouselMenu({ weeklyTotal, onSelectWeek }: CarouselItemProps) {
    */
   const renderItem = ({ item }: { item: any }) => {
     const activeItemStyle = item === activeIndex || false;
-    // console.log(carouselRef.current.);
+    console.log(carouselRef.current.currentIndex);
 
     return (
       <CarouselItem

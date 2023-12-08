@@ -11,16 +11,10 @@ import Animated, {
   withSequence,
 } from 'react-native-reanimated';
 import WarningNoPost from '../warningSign/WarningNoPost';
+import { WeeklyItem } from '../../pages/WeeklySchedule';
 
-interface UserWeeklyData {
-  id: number;
-  weekNumber: number;
-  content: string;
-  done: boolean;
-}
-
-interface PropsUserWeeklyDataProps {
-  data: Array<UserWeeklyData>;
+interface UserWeeklyDataProps {
+  data: Array<WeeklyItem>;
   mode: ACTIVE_MODE;
   slideDirection: number;
   onDone: (id: number) => void;
@@ -31,7 +25,7 @@ interface PropsUserWeeklyDataProps {
  * WeekContent 컴포넌트
  * @description 주관련 전체 리스트 컨텐츠, ProgressBar와 FlatList컴포넌트로 구성
  */
-function WeekContent({ data, mode, slideDirection, onDone, onRemove }: PropsUserWeeklyDataProps) {
+function WeekContent({ data, mode, slideDirection, onDone, onRemove }: UserWeeklyDataProps) {
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -50,7 +44,7 @@ function WeekContent({ data, mode, slideDirection, onDone, onRemove }: PropsUser
     };
   });
 
-  const renderItem = ({ item }: { item: UserWeeklyData }) => {
+  const renderItem = ({ item }: { item: WeeklyItem }) => {
     return <ListItem item={item} mode={mode} onDone={onDone} onRemove={onRemove} />;
   };
 

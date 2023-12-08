@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 
-export interface CarouselWeekItemProps {
+interface CarouselWeekItemProps {
   weekNumber: number;
   active: boolean;
   onClickIndex: (index: number) => void;

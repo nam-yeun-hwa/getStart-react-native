@@ -10,7 +10,7 @@ import InputBox from '../components/weeklySchedule/InputBox';
 import { ACTIVE_MODE } from '../constants/constant';
 import Toast from '../components/warningSign/Toast';
 
-interface WeeklyItem {
+export interface WeeklyItem {
   id: number;
   weekNumber: number;
   content: string;
