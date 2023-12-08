@@ -32,10 +32,6 @@ interface PropsUserWeeklyData {
  * @description 주관련 전체 리스트 컨텐츠, ProgressBar와 FlatList컴포넌트로 구성
  */
 function WeekContent({ data, mode, slideDirection, onDone, onRemove }: PropsUserWeeklyData) {
-  /**
-   * @description 애니메이션 초기 값 설정
-   */
-
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [
@@ -60,29 +56,19 @@ function WeekContent({ data, mode, slideDirection, onDone, onRemove }: PropsUser
 
   return (
     <Animated.View style={[styles.container, animatedStyle]}>
-      <View style={styles.innerContainer}>
-        {data.length > 0 ? (
-          <ProgressBar totalStep={data.length} nowStep={data.filter((v) => v.done).length} />
-        ) : (
-          <WarningNoPost />
-        )}
+      {data.length > 0 ? (
+        <ProgressBar totalStep={data.length} nowStep={data.filter((v) => v.done).length} />
+      ) : (
+        <WarningNoPost />
+      )}
 
-        <FlatList
-          style={styles.container}
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-        />
-      </View>
+      <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item.id.toString()} />
     </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  innerContainer: {
     flex: 1,
   },
 

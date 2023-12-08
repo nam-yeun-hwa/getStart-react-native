@@ -1,19 +1,12 @@
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { ACTIVE_MODE } from "../../constants/constant";
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ACTIVE_MODE } from '../../constants/constant';
 import Animated, {
   Easing,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from "react-native-reanimated";
-import { useEffect } from "react";
+} from 'react-native-reanimated';
+import { useEffect } from 'react';
 
 interface UserWeeklyData {
   id: number;
@@ -34,32 +27,24 @@ interface WeeklyItemProps {
  * Week마다 개별 아이템
  */
 function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
-  const width = Dimensions.get("window").width;
-
-  const translateX = useSharedValue(0);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: translateX.value }],
-    };
-  });
+  const width = Dimensions.get('window').width;
 
   /**
-   * @description 헤더의 오른쪽 EDIT와 DONE 모드에 따라서 애니메이션 값을 변경
+   * mode가 ACTIVE_MODE.DONE 값일때는 -44 만큼 이동
+   * 그외에는 0으로 이동
    */
-  useEffect(() => {
-    if (mode === ACTIVE_MODE.DONE) {
-      translateX.value = withTiming(-44, {
-        duration: 150,
-        easing: Easing.ease,
-      }); // 애니메이션 등장
-    } else {
-      translateX.value = withTiming(0, {
-        duration: 150,
-        easing: Easing.ease,
-      }); // 애니메이션 등장
-    }
-  }, [mode]);
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateX: withTiming(mode === ACTIVE_MODE.DONE ? -44 : 0, {
+            duration: 150,
+            easing: Easing.ease,
+          }),
+        },
+      ],
+    };
+  });
 
   return (
     <Animated.View style={[, styles.container, animatedStyle]}>
@@ -68,12 +53,12 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
           <View style={[styles.checkBasic, item.done && styles.done]}>
             {item.done ? (
               <Image
-                source={require("../../assets/icon/ico_check_active.png")}
+                source={require('../../assets/icon/ico_check_active.png')}
                 style={styles.iconCheck}
               />
             ) : (
               <Image
-                source={require("../../assets/icon/ico_check_basic.png")}
+                source={require('../../assets/icon/ico_check_basic.png')}
                 style={styles.iconCheck}
               />
             )}
@@ -90,7 +75,7 @@ function ListItem({ item, mode, onDone, onRemove }: WeeklyItemProps) {
         <TouchableOpacity onPress={() => onRemove(item.id)}>
           <View style={styles.del}>
             <Image
-              source={require("../../assets/icon/ico_minus.png")}
+              source={require('../../assets/icon/ico_minus.png')}
               style={styles.iconMinus}
             ></Image>
           </View>
@@ -106,7 +91,7 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 10,
     marginHorizontal: 20,
   },
@@ -125,37 +110,37 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 50,
-    backgroundColor: "#F0F0F0",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#F0F0F0',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 5,
     marginRight: 20,
   },
 
   done: {
-    backgroundColor: "#44CEC6",
+    backgroundColor: '#44CEC6',
   },
 
   lineThrough: {
-    color: "#C4C4C4",
-    textDecorationLine: "line-through",
+    color: '#C4C4C4',
+    textDecorationLine: 'line-through',
   },
 
   del: {
-    position: "absolute",
+    position: 'absolute',
     right: 0,
     top: 0,
     width: 28,
     height: 28,
     borderRadius: 50,
-    backgroundColor: "#FF5146",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#FF5146',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginRight: -8,
   },
 
   txt: {
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
     flex: 1,
     fontSize: 14,
     lineHeight: 21,
