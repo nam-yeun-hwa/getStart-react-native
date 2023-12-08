@@ -143,7 +143,7 @@ isFinished가 true값이 들어온다.
 ```
 
 
-## withSequence 함수를 사용하면 여러 애니메이션 단계를 순차적으로 실행하는 방법
+## withSequence 함수를 사용하여 여러 애니메이션 단계를 순차적으로 실행하는 방법
 
 ```shell
 const animatedStyle = useAnimatedStyle(() => {
