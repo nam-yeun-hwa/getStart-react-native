@@ -171,7 +171,28 @@ const animatedStyle = useAnimatedStyle(() => {
 });
 ```
 
+## withTiming
 
+선형 또는 사용자 정의 이징 함수를 사용한 애니메이션을 생성하는 데 사용
+```shell
+// 목표값 100으로 하는 선형 애니메이션
+const linearAnimation = withTiming(100, { duration: 500 });
+
+// 목표값 200으로 하는 사용자 정의 이징 함수 애니메이션
+const customEasingAnimation = withTiming(200, { duration: 500, easing: Easing.bounce });
+```
+
+## withSpring
+ 스프링 애니메이션을 생성합니다. 스프링 애니메이션은 물리적 스프링 모델을 기반으로 하며, 탄력적인 동작을 특징으로 합니다. </br>
+ damping 및 stiffness와 같은 옵션을 사용하여 스프링의 강도 및 감쇠를 조절할 수 있습니다.
+ 
+ ```shell
+// 목표값 100으로 하는 스프링 애니메이션
+const springAnimation = withSpring(100);
+
+// 목표값 200으로 하는 사용자 정의 강도와 감쇠 설정이 있는 스프링 애니메이션
+const customSpringAnimation = withSpring(200, { damping: 5, stiffness: 100 });
+```
 
 
 
