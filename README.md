@@ -1,5 +1,5 @@
 # 기술 스택
-- react-native
+- react-native(0.72.7)
 - typescript
 
 
