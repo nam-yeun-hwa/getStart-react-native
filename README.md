@@ -1,3 +1,9 @@
+# 기술 스택
+- react-native
+- typescript
+
+
+
 # 테스트 화면
 
 
