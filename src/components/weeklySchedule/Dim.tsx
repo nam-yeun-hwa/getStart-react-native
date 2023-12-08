@@ -8,7 +8,7 @@ import {
   Platform,
 } from 'react-native';
 
-interface DimActive {
+interface DimActiveProps {
   active: boolean;
   onToggle: () => void;
 }
@@ -17,7 +17,7 @@ interface DimActive {
  * DimBehindKeyboardExample 컴포넌트
  * @description 키보드 오픈시 DIm 영역
  */
-const DimBehindKeyboardExample = ({ active, onToggle }: DimActive) => {
+const DimBehindKeyboardExample = ({ active, onToggle }: DimActiveProps) => {
   return (
     <>
       {active && (

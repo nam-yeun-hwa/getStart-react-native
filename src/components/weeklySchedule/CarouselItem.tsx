@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 
-export interface CarouselWeekItem {
+export interface CarouselWeekItemProps {
   weekNumber: number;
   active: boolean;
   onClickIndex: (index: number) => void;
@@ -10,7 +10,7 @@ export interface CarouselWeekItem {
  * CarouselItem 컴포넌트
  * @description 캐러셀되는 아이템
  */
-function CarouselItem({ active, weekNumber, onClickIndex }: CarouselWeekItem) {
+function CarouselItem({ active, weekNumber, onClickIndex }: CarouselWeekItemProps) {
   return (
     <TouchableNativeFeedback onPress={() => onClickIndex(weekNumber)}>
       <View style={[styles.container, active && styles.activeState]}>

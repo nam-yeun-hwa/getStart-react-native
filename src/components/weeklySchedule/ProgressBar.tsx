@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, StyleSheet, Animated, Text } from "react-native";
+import React, { useEffect, useRef, useState } from 'react';
+import { View, StyleSheet, Animated, Text } from 'react-native';
 
-interface Step {
+interface StepProps {
   totalStep: number;
   nowStep: number;
 }
@@ -10,7 +10,7 @@ interface Step {
  * ProgressBar 컴포넌트
  *@description  프로그레스 바 관련
  */
-function ProgressBar({ totalStep, nowStep }: Step) {
+function ProgressBar({ totalStep, nowStep }: StepProps) {
   const loaderValue = useRef(new Animated.Value(0)).current;
 
   const load = (count: number) => {
@@ -23,8 +23,8 @@ function ProgressBar({ totalStep, nowStep }: Step) {
 
   const width = loaderValue.interpolate({
     inputRange: [0, 100],
-    outputRange: ["0%", "100%"],
-    extrapolate: "clamp",
+    outputRange: ['0%', '100%'],
+    extrapolate: 'clamp',
   });
 
   useEffect(() => {
@@ -38,14 +38,12 @@ function ProgressBar({ totalStep, nowStep }: Step) {
           {totalStep} of {nowStep} completed
         </Text>
 
-        <Text style={styles.percent}>
-          {Math.floor((nowStep / totalStep) * 100)}%
-        </Text>
+        <Text style={styles.percent}>{Math.floor((nowStep / totalStep) * 100)}%</Text>
       </View>
       <View style={styles.bar}>
         <Animated.View
           style={{
-            backgroundColor: "#44CEC6",
+            backgroundColor: '#44CEC6',
             width,
             height: 6,
             borderRadius: 10,
@@ -61,39 +59,39 @@ const styles = StyleSheet.create({
     marginBottom: 36,
   },
   bar: {
-    width: "100%",
+    width: '100%',
     height: 6,
-    backgroundColor: "#F6F5F8",
+    backgroundColor: '#F6F5F8',
     borderRadius: 10,
   },
   step: {
-    color: "#AAC9CE",
-    fontWeight: "400",
+    color: '#AAC9CE',
+    fontWeight: '400',
     fontSize: 22,
     padding: 22,
     lineHeight: 22 * 1.3,
-    textAlign: "center",
+    textAlign: 'center',
   },
 
   information: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingTop: 28,
     paddingBottom: 17,
   },
 
   txt: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
     lineHeight: 21,
-    color: "#333333",
+    color: '#333333',
   },
 
   percent: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 14,
     lineHeight: 21,
-    color: "#00BBBB",
+    color: '#00BBBB',
   },
 });
 export default ProgressBar;

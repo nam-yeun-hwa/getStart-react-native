@@ -19,7 +19,7 @@ interface UserWeeklyData {
   done: boolean;
 }
 
-interface PropsUserWeeklyData {
+interface PropsUserWeeklyDataProps {
   data: Array<UserWeeklyData>;
   mode: ACTIVE_MODE;
   slideDirection: number;
@@ -31,7 +31,7 @@ interface PropsUserWeeklyData {
  * WeekContent 컴포넌트
  * @description 주관련 전체 리스트 컨텐츠, ProgressBar와 FlatList컴포넌트로 구성
  */
-function WeekContent({ data, mode, slideDirection, onDone, onRemove }: PropsUserWeeklyData) {
+function WeekContent({ data, mode, slideDirection, onDone, onRemove }: PropsUserWeeklyDataProps) {
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [

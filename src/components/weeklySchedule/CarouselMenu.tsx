@@ -2,9 +2,9 @@ import { SetStateAction, useCallback, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { Dimensions } from 'react-native';
-import CarouselItem, { CarouselWeekItem } from './CarouselItem';
+import CarouselItem from './CarouselItem';
 
-interface CarouselItem {
+interface CarouselItemProps {
   weeklyTotal: number;
   onSelectWeek: (select: number) => void;
 }
@@ -12,7 +12,7 @@ interface CarouselItem {
  * CarouselMenu 컴포넌트
  * @description 캐러셀 메뉴 아이템 리스트를 관리하는 컨테이너
  */
-function CarouselMenu({ weeklyTotal, onSelectWeek }: CarouselItem) {
+function CarouselMenu({ weeklyTotal, onSelectWeek }: CarouselItemProps) {
   const [activeIndex, setActiveIndex] = useState<number>(1);
   const carouselRef = useRef<any>(null);
 
